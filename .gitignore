@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#lock files
+package-lock.json
+
 # Runtime data
 pids
 *.pid
@@ -15,7 +18,9 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
+reports/
+docs/
 
 # nyc test coverage
 .nyc_output
@@ -31,13 +36,18 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+dist/
 
 # Dependency directories
 node_modules/
 jspm_packages/
+package-lock.json
 
 # TypeScript v1 declaration files
 typings/
+
+# TypeScript cache
+.tscache/
 
 # Optional npm cache directory
 .npm
@@ -59,3 +69,13 @@ typings/
 
 # next.js build output
 .next
+
+#mocha test-results
+test-results.xml
+xunit.xml
+
+#stryker folder 
+.stryker-tmp/
+
+# certs
+certs

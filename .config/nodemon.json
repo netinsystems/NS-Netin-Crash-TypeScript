@@ -1,0 +1,10 @@
+{
+    "restartable": "rs",
+    "ignore": [".git", "node_modules"],
+    "verbose": true,
+    "watch": [
+        "src"
+    ],
+    "ext": "js,ts,yml,json",
+    "exec": "npm run test"
+}

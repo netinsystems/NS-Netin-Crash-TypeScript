@@ -1,0 +1,16 @@
+{
+    "mode": "file",
+    "out": "docs",
+    "name": "NS-Carbon",
+    "readme": "./README.md",
+    "includeDeclarations": true,
+    "exclude": ["./node_modules", "src/**/*.test.ts", "src/**/*.spec.ts", "src/**/*-test.ts", "src/**/*-spec.ts"],
+    "tsconfig": "./tsconfig.json",
+    "excludeExternals": true,
+    "ignoreCompilerErrors": true,
+    "listInvalidSymbolLinks": true,
+    "categorizeByGroup": false,
+    "excludeNotExported": true,
+    "includeVersion": true,
+    "defaultCategory": "NS-Carbon"
+}

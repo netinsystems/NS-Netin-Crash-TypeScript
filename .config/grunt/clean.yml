@@ -1,0 +1,7 @@
+dist:
+ - dist/**/*.map
+ #- dist/**/*.test.js
+ #- dist/**/*-test.js
+ #- dist/**/*-spec.js
+ #- dist/**/*.spec.js
+ - dist/package-lock.jon

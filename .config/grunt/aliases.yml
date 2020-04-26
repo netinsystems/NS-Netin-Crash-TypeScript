@@ -1,0 +1,49 @@
+default:
+  description: Build, unit test, clean dist folder and document generation.
+  tasks:
+    - exec:compile
+    - env:test
+    - exec:test
+    - stryker:mocha
+    - exec:doc
+    #- copy:main
+    #- exec:npm_production
+    #- clean:dist
+    - exec:release
+doc:
+  description: Compile and run watch
+  tasks:
+    - exec:doc
+devMode:
+  description: Compile and run watch
+  tasks:
+    - concurrent:dev
+devWatch:
+  description: Compile a execute test in development mode (watch)
+  tasks:
+    - watch:dev
+runWatch:
+  description: Start the server
+  tasks: 
+    - watch:run
+compile:
+  description: Compile in development mode (watch)
+  tasks:
+    - ts:compile
+test:
+  description: Perform unit test
+  tasks:
+    - env:test
+    - exec:test
+run:
+  description: Run server
+  tasks:
+    - exec:run
+mutants:
+  description: Perform mutant test
+  tasks:
+    - stryker:mocha
+changes:
+  description: Perform changelog creation
+  tasks:
+    - exec:release

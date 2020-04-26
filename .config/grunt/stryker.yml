@@ -1,0 +1,3 @@
+mocha:
+  options:
+    configFile: .config/stryker.config.js

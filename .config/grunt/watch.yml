@@ -1,0 +1,10 @@
+dev:
+  files: src/**/*.ts
+  tasks: ['compile']
+  options:
+    reload: false
+run:
+  files: dist/**/*.js
+  tasks: ['run']
+  options:
+    reload: true

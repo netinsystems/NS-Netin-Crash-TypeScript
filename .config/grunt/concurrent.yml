@@ -1,0 +1,6 @@
+dev:
+  tasks:
+    - devWatch
+    - runWatch
+  options:
+    logConcurrentOutput: true

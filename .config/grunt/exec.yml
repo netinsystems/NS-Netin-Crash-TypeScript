@@ -1,0 +1,14 @@
+doc:
+  command: "npx typedoc --options .config/typedoc.json --out docs/ src/"
+test:
+  command: "npx nyc --nycrc-path .config/.nycrc.json npx mocha --config .config/.mocharc.yml"
+run:
+  command: "node ./dist/server.js"
+npm_production:
+  cwd: 'dist/'
+  command: 'npm install --production'
+release:
+  command: npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0 -u
+compile:
+  cwd: ./
+  command: tsc
