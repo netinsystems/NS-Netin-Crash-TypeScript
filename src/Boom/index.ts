@@ -13,4 +13,4 @@ import * as _BoomHelpers from './httpHelpers';
 
 export const BoomHelpers = _BoomHelpers;
 export { Boom, BoomOptions } from './BoomError';
-export { APISource } from './httpCodes';
+export { APISource, APIError } from './httpCodes';

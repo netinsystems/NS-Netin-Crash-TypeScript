@@ -114,13 +114,10 @@ describe('In #Crash class the ', () => {
             };
             expect(test).to.throw('Message parameter must be an Error or string');
         });
-        it('should throw a Crash error if message is to large (>240)', () => {
-            const test = () => {
-                new Crash('o'.padEnd(241, 'o'), uuidTest);
-            };
-            expect(test).to.throw(
-                'Too long error message, maximum allowed is 240 characters and the actual length is [241]'
-            );
+        it('should truncate the message if message is to large (>240)', () => {
+            const error = new Crash('o'.padEnd(241, 'o'), uuidTest);
+            expect(error.message.length).to.be.equal(240);
+            expect(error.message).to.contain('...too long error');
         });
         it('should throw a Crash error if name!=string', () => {
             const test = () => {

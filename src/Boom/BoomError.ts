@@ -10,43 +10,22 @@
  */
 'use strict';
 import * as HTTP from './httpCodes';
-import { Crash, Cause } from '../Crash';
+import { Crash } from '../Crash';
 import { Multi } from '../Multi';
-import { Base, BaseOptions } from '../BaseError';
-
-// *************************************************************************************************
-// #region @Hapi/Joi Validations error interfaces
-interface ValidationError extends Error {
-    name: 'ValidationError';
-    isJoi: boolean;
-    details: ValidationErrorItem[];
-    _object: any;
-}
-interface ValidationErrorItem {
-    message: string;
-    path: Array<string | number>;
-    type: string;
-    context?: Context;
-}
-interface Context {
-    [key: string]: any;
-    key?: string;
-    label?: string;
-    value?: any;
-}
-// #endregion
+import { Base, BaseOptions, ValidationError } from '../BaseError';
+type Cause = Error | Multi | Crash;
 export interface BoomOptions extends BaseOptions {
     links?: {
         [x: string]: string;
     };
     source?: HTTP.APISource;
-    cause?: Error | Crash;
+    cause?: Cause;
 }
 /**
- * Check if the cause is a valid error or Crash
+ * Check if the cause are type safe and valid
  * @param cause - Crash error cause
  */
-function checkCause(uuid: string, cause?: Cause): Cause | undefined {
+function _typeSafeCause(uuid: string, cause?: Error | Crash): Error | Crash | undefined {
     if (cause) {
         if (cause instanceof Crash || cause instanceof Error) {
             return cause;
@@ -57,7 +36,11 @@ function checkCause(uuid: string, cause?: Cause): Cause | undefined {
         return undefined;
     }
 }
-function checkLinks(links?: { [x: string]: string }): boolean {
+/**
+ * Check if links are type safe and valid
+ * @param links - Information links for error
+ */
+function _typeSafeLinks(links?: { [x: string]: string }): boolean {
     if (typeof links === 'object') {
         let check = true;
         Object.keys(links).forEach(key => {
@@ -72,7 +55,11 @@ function checkLinks(links?: { [x: string]: string }): boolean {
         return false;
     }
 }
-function checkSource(source?: HTTP.APISource): boolean {
+/**
+ * Check if source are type safe and valid
+ * @param source - Source of error
+ */
+function _typeSafeSource(source?: HTTP.APISource): boolean {
     if (source !== undefined) {
         return typeof source.pointer === 'string';
     } else {
@@ -82,7 +69,7 @@ function checkSource(source?: HTTP.APISource): boolean {
 /** Class Boom, manages HTTP errors in Netin Systems */
 export class Boom extends Base {
     /** Boom error cause */
-    protected _cause?: Cause | Multi;
+    protected _cause?: Cause;
     /** Boom error code */
     private readonly _code: number;
     /** Links that leads to further details about this particular occurrence of the problem */
@@ -114,9 +101,9 @@ export class Boom extends Base {
         // #endregion
         // *****************************************************************************************
         // #region options type safe
-        this._cause = checkCause(uuid, options?.cause);
+        this._cause = _typeSafeCause(uuid, options?.cause);
         // #endregion
-        if (!checkLinks(options?.links) || !checkSource(options?.source)) {
+        if (!_typeSafeLinks(options?.links) || !_typeSafeSource(options?.source)) {
             throw new Crash('Links and source must be strings', uuid);
         }
         this._links = options?.links;
@@ -158,7 +145,7 @@ export class Boom extends Base {
         return this._isBoom;
     }
     /** Source error */
-    get cause(): Crash | Error | undefined {
+    get cause(): Cause | undefined {
         return this._cause;
     }
     /**
@@ -167,19 +154,10 @@ export class Boom extends Base {
      * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
      */
     Boomify(error: ValidationError): void {
-        if (error?.name === 'ValidationError') {
+        if (error.name === 'ValidationError') {
             if (error.details.length > 1) {
                 this._cause = new Multi(error.message, this._uuid, { name: 'ValidationError' });
-                error.details.forEach(detail => {
-                    if (this._cause instanceof Multi) {
-                        this._cause.push(
-                            new Crash(detail.message, this._uuid, {
-                                name: 'ValidationError',
-                                info: detail,
-                            })
-                        );
-                    }
-                });
+                (this._cause as Multi).Multify(error);
             } else {
                 this._cause = new Crash(error.message, this._uuid, {
                     name: 'ValidationError',

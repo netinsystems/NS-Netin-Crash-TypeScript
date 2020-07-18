@@ -9,8 +9,8 @@
  * unless prior written permission is obtained from Netin Systems S.L.
  */
 'use strict';
-import { Base, BaseOptions } from '../BaseError';
-import { Crash, Cause } from '../Crash';
+import { Base, BaseOptions, ValidationError } from '../BaseError';
+import { Crash } from '../Crash';
 
 export interface MultiOptions extends BaseOptions {
     causes?: Array<Error | Crash> | Error | Crash;
@@ -21,6 +21,7 @@ export interface MultiObject {
     uuid: string;
     trace: string[];
 }
+type Cause = Error | Crash;
 export class Multi extends Base {
     /** Multi error causes */
     private _causes?: Array<Cause>;
@@ -66,18 +67,20 @@ export class Multi extends Base {
     /** Get a trace of this sequence of errors */
     public trace(): string[] {
         const trace: string[] = [];
-        this.causes?.forEach(cause => {
-            if (cause instanceof Crash) {
-                trace.push(...cause.trace());
-            } else {
-                trace.push(`${cause.name}: ${cause.message}`);
-            }
-        });
+        if (this.causes) {
+            this.causes.forEach(cause => {
+                if (cause instanceof Crash) {
+                    trace.push(...cause.trace());
+                } else {
+                    trace.push(`${cause.name}: ${cause.message}`);
+                }
+            });
+        }
         return trace;
     }
     /** Look in the nested causes of the error and return the first occurrence */
     public findCauseByName(name: string): Cause | undefined {
-        let foundCause: Crash | Error | undefined;
+        let foundCause: Cause | undefined;
         if (this._causes !== undefined) {
             this._causes.forEach(cause => {
                 if (cause.name === name && foundCause === undefined) {
@@ -110,7 +113,7 @@ export class Multi extends Base {
         return this.stack + arrayStack;
     }
     /** Add a new error on the array of causes */
-    public push(error: Error | Crash): void {
+    public push(error: Cause): void {
         if (this._causes !== undefined) {
             this._causes.push(error);
         } else {
@@ -118,7 +121,7 @@ export class Multi extends Base {
         }
     }
     /** Remove a error from the array of causes */
-    public pop(): Error | Crash | undefined {
+    public pop(): Cause | undefined {
         if (this._causes !== undefined) {
             return this._causes.pop();
         } else {
@@ -133,5 +136,21 @@ export class Multi extends Base {
             uuid: this._uuid,
             trace: this.trace(),
         };
+    }
+    /** Insert \@Hapi/Joi Validation error in the array of causes */
+    public Multify(error: ValidationError): number {
+        if (error.name === 'ValidationError') {
+            error.details.forEach(detail => {
+                this.push(
+                    new Crash(detail.message, this._uuid, {
+                        name: 'ValidationError',
+                        info: detail,
+                    })
+                );
+            });
+            return error.details.length;
+        } else {
+            return 0;
+        }
     }
 }

@@ -9,6 +9,6 @@
  * unless prior written permission is obtained from Netin Systems S.L.
  */
 'use strict';
-export * from './Boom';
-export * from './Crash';
-export * from './Multi';
+export { Boom, BoomHelpers, BoomOptions, APIError, APISource } from './Boom';
+export { Crash, CrashOptions, CrashObject } from './Crash';
+export { Multi, MultiOptions, MultiObject } from './Multi';

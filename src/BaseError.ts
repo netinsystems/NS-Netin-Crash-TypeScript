@@ -18,6 +18,27 @@ export interface BaseOptions {
         [x: string]: any;
     };
 }
+// *************************************************************************************************
+// #region @Hapi/Joi Validations error interfaces
+export interface ValidationError extends Error {
+    name: 'ValidationError';
+    isJoi: boolean;
+    details: ValidationErrorItem[];
+    _object: any;
+}
+export interface ValidationErrorItem {
+    message: string;
+    path: Array<string | number>;
+    type: string;
+    context?: Context;
+}
+export interface Context {
+    [key: string]: any;
+    key?: string;
+    label?: string;
+    value?: any;
+}
+// #endregion
 /** Class Base, manages errors in Netin Systems */
 export class Base extends Error {
     /** Crash error extra information */
@@ -48,11 +69,7 @@ export class Base extends Error {
             throw new Base('Message parameter must be an Error or string', uuid);
         }
         if (message.length > MESSAGE_LENGTH) {
-            throw new Base(
-                `Too long error message, maximum allowed is ${MESSAGE_LENGTH} characters` +
-                    ` and the actual length is [${message.length}]`,
-                uuid
-            );
+            message = `${message.substring(0, MESSAGE_LENGTH - 18)} ...too long error`;
         }
         this.message = message;
         // #endregion
@@ -70,7 +87,7 @@ export class Base extends Error {
         Error.captureStackTrace(this, this.constructor);
     }
     /** Extra info of this error */
-    get info(): object | undefined {
+    get info(): Record<string, unknown> | undefined {
         return this._info;
     }
     /** uuid error identifier */

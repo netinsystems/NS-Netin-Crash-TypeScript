@@ -10,11 +10,10 @@
  */
 'use strict';
 import { Base, BaseOptions } from '../BaseError';
+type Cause = Crash | Error;
 export interface CrashOptions extends BaseOptions {
-    cause?: Error | Crash;
+    cause?: Cause;
 }
-export type Cause = Error | Crash;
-
 export interface CrashObject {
     name: string;
     message: string;
@@ -54,7 +53,7 @@ export class Crash extends Base {
         return this._isCrash;
     }
     /** Source error */
-    get cause(): Crash | Error | undefined {
+    get cause(): Cause | undefined {
         return this._cause;
     }
     /** Get a trace of this sequence of errors */
@@ -74,7 +73,7 @@ export class Crash extends Base {
         return trace;
     }
     /** Look in the nested causes of the error and return the first occurrence */
-    public findCauseByName(name: string): Crash | Error | undefined {
+    public findCauseByName(name: string): Cause | undefined {
         let cause = this._cause;
         while (cause) {
             if (cause.name === name) {
