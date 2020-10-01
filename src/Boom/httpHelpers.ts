@@ -13,7 +13,7 @@ import { Boom, BoomOptions } from './BoomError';
 import { HTTP_CODE } from './httpCodes';
 
 function regularError(message: string, uuid: string, code: number, options?: BoomOptions): Boom {
-    return new Boom(message, uuid, code, options);
+  return new Boom(message, uuid, code, options);
 }
 // *************************************************************************************************
 // #region HTTP 4xx Errors
@@ -27,7 +27,7 @@ function regularError(message: string, uuid: string, code: number, options?: Boo
  * @param options - Specific options for enhanced error management
  */
 export const badRequest = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.BAD_REQUEST, options);
+  return regularError(message, uuid, HTTP_CODE.BAD_REQUEST, options);
 };
 /**
  * The HTTP 401 Unauthorized client error status response code indicates that the request has not
@@ -39,7 +39,7 @@ export const badRequest = (message: string, uuid: string, options?: BoomOptions)
  * @param options - Specific options for enhanced error management
  */
 export const unauthorized = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.UNAUTHORIZED, options);
+  return regularError(message, uuid, HTTP_CODE.UNAUTHORIZED, options);
 };
 /**
  * The HTTP 402 Payment Required is a nonstandard client error status response code that is reserved
@@ -53,7 +53,7 @@ export const unauthorized = (message: string, uuid: string, options?: BoomOption
  * @param options - Specific options for enhanced error management
  */
 export const paymentRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.PAYMENT_REQUIRED, options);
+  return regularError(message, uuid, HTTP_CODE.PAYMENT_REQUIRED, options);
 };
 /**
  * The HTTP 403 Forbidden client error status response code indicates that the server understood the
@@ -66,7 +66,7 @@ export const paymentRequired = (message: string, uuid: string, options?: BoomOpt
  * @param options - Specific options for enhanced error management
  */
 export const forbidden = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.FORBIDDEN, options);
+  return regularError(message, uuid, HTTP_CODE.FORBIDDEN, options);
 };
 /**
  * The HTTP 404 Not Found client error response code indicates that the server can't find the
@@ -79,7 +79,7 @@ export const forbidden = (message: string, uuid: string, options?: BoomOptions):
  * @param options - Specific options for enhanced error management
  */
 export const notFound = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.NOT_FOUND, options);
+  return regularError(message, uuid, HTTP_CODE.NOT_FOUND, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 405 Method Not Allowed response status code indicates that
@@ -91,7 +91,7 @@ export const notFound = (message: string, uuid: string, options?: BoomOptions): 
  * @param options - Specific options for enhanced error management
  */
 export const methodNotAllowed = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.METHOD_NOT_ALLOWED, options);
+  return regularError(message, uuid, HTTP_CODE.METHOD_NOT_ALLOWED, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 406 Not Acceptable client error response code indicates
@@ -109,7 +109,7 @@ export const methodNotAllowed = (message: string, uuid: string, options?: BoomOp
  * @param options - Specific options for enhanced error management
  */
 export const notAcceptable = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.NOT_ACCEPTABLE, options);
+  return regularError(message, uuid, HTTP_CODE.NOT_ACCEPTABLE, options);
 };
 /**
  * The HTTP 407 Proxy Authentication Required client error status response code indicates that the
@@ -122,7 +122,7 @@ export const notAcceptable = (message: string, uuid: string, options?: BoomOptio
  * @param options - Specific options for enhanced error management
  */
 export const proxyAuthRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.PROXY_AUTHENTICATION_REQUIRED, options);
+  return regularError(message, uuid, HTTP_CODE.PROXY_AUTHENTICATION_REQUIRED, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 408 Request Timeout response status code means that the
@@ -137,7 +137,7 @@ export const proxyAuthRequired = (message: string, uuid: string, options?: BoomO
  * @param options - Specific options for enhanced error management
  */
 export const requestTimeout = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.REQUEST_TIMEOUT, options);
+  return regularError(message, uuid, HTTP_CODE.REQUEST_TIMEOUT, options);
 };
 /**
  * The HTTP 409 Conflict response status code indicates a request conflict with current state of the
@@ -150,7 +150,7 @@ export const requestTimeout = (message: string, uuid: string, options?: BoomOpti
  * @param options - Specific options for enhanced error management
  */
 export const conflict = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.CONFLICT, options);
+  return regularError(message, uuid, HTTP_CODE.CONFLICT, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 410 Gone client error response code indicates that access
@@ -163,7 +163,7 @@ export const conflict = (message: string, uuid: string, options?: BoomOptions): 
  * @param options - Specific options for enhanced error management
  */
 export const gone = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.GONE, options);
+  return regularError(message, uuid, HTTP_CODE.GONE, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 411 Length Required client error response code indicates
@@ -173,7 +173,7 @@ export const gone = (message: string, uuid: string, options?: BoomOptions): Boom
  * @param options - Specific options for enhanced error management
  */
 export const lengthRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.LENGTH_REQUIRED, options);
+  return regularError(message, uuid, HTTP_CODE.LENGTH_REQUIRED, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 412 Precondition Failed client error response code
@@ -186,7 +186,7 @@ export const lengthRequired = (message: string, uuid: string, options?: BoomOpti
  * @param options - Specific options for enhanced error management
  */
 export const preconditionFailed = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.PRECONDITION_FAILED, options);
+  return regularError(message, uuid, HTTP_CODE.PRECONDITION_FAILED, options);
 };
 /**
  * The HTTP 413 Payload Too Large response status code indicates that the request entity is larger
@@ -197,7 +197,7 @@ export const preconditionFailed = (message: string, uuid: string, options?: Boom
  * @param options - Specific options for enhanced error management
  */
 export const payloadTooLarge = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.PAYLOAD_TOO_LARGE, options);
+  return regularError(message, uuid, HTTP_CODE.PAYLOAD_TOO_LARGE, options);
 };
 /**
  * The HTTP 414 URI Too Long response status code indicates that the URI requested by the client is
@@ -213,7 +213,7 @@ export const payloadTooLarge = (message: string, uuid: string, options?: BoomOpt
  * @param options - Specific options for enhanced error management
  */
 export const uriTooLong = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.URI_TOO_LONG, options);
+  return regularError(message, uuid, HTTP_CODE.URI_TOO_LONG, options);
 };
 /**
  * The HTTP 415 Unsupported Media Type client error response code indicates that the server refuses
@@ -225,11 +225,11 @@ export const uriTooLong = (message: string, uuid: string, options?: BoomOptions)
  * @param options - Specific options for enhanced error management
  */
 export const unsupportedMediaType = (
-    message: string,
-    uuid: string,
-    options?: BoomOptions
+  message: string,
+  uuid: string,
+  options?: BoomOptions
 ): Boom => {
-    return regularError(message, uuid, HTTP_CODE.UNSUPPORTED_MEDIA_TYPE, options);
+  return regularError(message, uuid, HTTP_CODE.UNSUPPORTED_MEDIA_TYPE, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 416 Range Not Satisfiable error response code indicates
@@ -245,7 +245,7 @@ export const unsupportedMediaType = (
  * @param options - Specific options for enhanced error management
  */
 export const rangeNotSatisfiable = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.RANGE_NOT_SATISFIABLE, options);
+  return regularError(message, uuid, HTTP_CODE.RANGE_NOT_SATISFIABLE, options);
 };
 /**
  * The HTTP 417 Expectation Failed client error response code indicates that the expectation given
@@ -256,7 +256,7 @@ export const rangeNotSatisfiable = (message: string, uuid: string, options?: Boo
  * @param options - Specific options for enhanced error management
  */
 export const expectationFailed = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.EXPECTATION_FAILED, options);
+  return regularError(message, uuid, HTTP_CODE.EXPECTATION_FAILED, options);
 };
 /**
  * The HTTP 418 I'm a teapot client error response code indicates that the server refuses to brew
@@ -268,7 +268,7 @@ export const expectationFailed = (message: string, uuid: string, options?: BoomO
  * @param options - Specific options for enhanced error management
  */
 export const teapot = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.I_AM_A_TEAPOT, options);
+  return regularError(message, uuid, HTTP_CODE.I_AM_A_TEAPOT, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 422 Unprocessable Entity response status code indicates
@@ -279,7 +279,7 @@ export const teapot = (message: string, uuid: string, options?: BoomOptions): Bo
  * @param options - Specific options for enhanced error management
  */
 export const unprocessableEntity = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.UNPROCESSABLE_ENTITY, options);
+  return regularError(message, uuid, HTTP_CODE.UNPROCESSABLE_ENTITY, options);
 };
 /**
  * The 423 (Locked) status code means the source or destination resource of a method is locked.
@@ -290,7 +290,7 @@ export const unprocessableEntity = (message: string, uuid: string, options?: Boo
  * @param options - Specific options for enhanced error management
  */
 export const locked = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.LOCKED, options);
+  return regularError(message, uuid, HTTP_CODE.LOCKED, options);
 };
 /**
  * The 424 (Failed Dependency) status code means that the method could not be performed on the
@@ -302,7 +302,7 @@ export const locked = (message: string, uuid: string, options?: BoomOptions): Bo
  * @param options - Specific options for enhanced error management
  */
 export const failedDependency = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.FAILED_DEPENDENCY, options);
+  return regularError(message, uuid, HTTP_CODE.FAILED_DEPENDENCY, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 425 Too Early response status code indicates that the
@@ -313,7 +313,7 @@ export const failedDependency = (message: string, uuid: string, options?: BoomOp
  * @param options - Specific options for enhanced error management
  */
 export const tooEarly = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.TOO_EARLY, options);
+  return regularError(message, uuid, HTTP_CODE.TOO_EARLY, options);
 };
 /**
  * The HTTP 426 Upgrade Required client error response code indicates that the server refuses to
@@ -325,7 +325,7 @@ export const tooEarly = (message: string, uuid: string, options?: BoomOptions): 
  * @param options - Specific options for enhanced error management
  */
 export const upgradeRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.UPGRADE_REQUIRED, options);
+  return regularError(message, uuid, HTTP_CODE.UPGRADE_REQUIRED, options);
 };
 /**
  * The HTTP 428 Precondition Required response status code indicates that the server requires the
@@ -338,11 +338,11 @@ export const upgradeRequired = (message: string, uuid: string, options?: BoomOpt
  * @param options - Specific options for enhanced error management
  */
 export const preconditionRequired = (
-    message: string,
-    uuid: string,
-    options?: BoomOptions
+  message: string,
+  uuid: string,
+  options?: BoomOptions
 ): Boom => {
-    return regularError(message, uuid, HTTP_CODE.PRECONDITION_REQUIRED, options);
+  return regularError(message, uuid, HTTP_CODE.PRECONDITION_REQUIRED, options);
 };
 /**
  * The HTTP 429 Too Many Requests response status code indicates the user has sent too many requests
@@ -354,7 +354,7 @@ export const preconditionRequired = (
  * @param options - Specific options for enhanced error management
  */
 export const tooManyRequests = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.TOO_MANY_REQUESTS, options);
+  return regularError(message, uuid, HTTP_CODE.TOO_MANY_REQUESTS, options);
 };
 /**
  * The HTTP 431 Request Header Fields Too Large response status code indicates that the server
@@ -372,11 +372,11 @@ export const tooManyRequests = (message: string, uuid: string, options?: BoomOpt
  * @param options - Specific options for enhanced error management
  */
 export const headerFieldsTooLarge = (
-    message: string,
-    uuid: string,
-    options?: BoomOptions
+  message: string,
+  uuid: string,
+  options?: BoomOptions
 ): Boom => {
-    return regularError(message, uuid, HTTP_CODE.REQUEST_HEADER_FIELDS_TOO_LARGE, options);
+  return regularError(message, uuid, HTTP_CODE.REQUEST_HEADER_FIELDS_TOO_LARGE, options);
 };
 // #endregion
 /**
@@ -388,7 +388,7 @@ export const headerFieldsTooLarge = (
  * @param options - Specific options for enhanced error management
  */
 export const illegal = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.UNAVAILABLE_FOR_LEGAL_REASONS, options);
+  return regularError(message, uuid, HTTP_CODE.UNAVAILABLE_FOR_LEGAL_REASONS, options);
 };
 // #endregion
 // *************************************************************************************************
@@ -406,7 +406,7 @@ export const illegal = (message: string, uuid: string, options?: BoomOptions): B
  * @param options - Specific options for enhanced error management
  */
 export const internalServerError = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.INTERNAL_SERVER_ERROR, options);
+  return regularError(message, uuid, HTTP_CODE.INTERNAL_SERVER_ERROR, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 501 Not Implemented server error response code means that
@@ -423,7 +423,7 @@ export const internalServerError = (message: string, uuid: string, options?: Boo
  * @param options - Specific options for enhanced error management
  */
 export const notImplemented = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.NOT_IMPLEMENTED, options);
+  return regularError(message, uuid, HTTP_CODE.NOT_IMPLEMENTED, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 502 Bad Gateway server error response code indicates that
@@ -434,7 +434,7 @@ export const notImplemented = (message: string, uuid: string, options?: BoomOpti
  * @param options - Specific options for enhanced error management
  */
 export const badGateway = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.BAD_GATEWAY, options);
+  return regularError(message, uuid, HTTP_CODE.BAD_GATEWAY, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 503 Service Unavailable server error response code
@@ -449,7 +449,7 @@ export const badGateway = (message: string, uuid: string, options?: BoomOptions)
  * @param options - Specific options for enhanced error management
  */
 export const serverUnavailable = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.SERVICE_UNAVAILABLE, options);
+  return regularError(message, uuid, HTTP_CODE.SERVICE_UNAVAILABLE, options);
 };
 /**
  * The HyperText Transfer Protocol (HTTP) 504 Gateway Timeout server error response code indicates
@@ -460,6 +460,6 @@ export const serverUnavailable = (message: string, uuid: string, options?: BoomO
  * @param options - Specific options for enhanced error management
  */
 export const gatewayTimeout = (message: string, uuid: string, options?: BoomOptions): Boom => {
-    return regularError(message, uuid, HTTP_CODE.GATEWAY_TIMEOUT, options);
+  return regularError(message, uuid, HTTP_CODE.GATEWAY_TIMEOUT, options);
 };
 // #endregion

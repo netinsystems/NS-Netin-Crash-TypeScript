@@ -2,7 +2,7 @@
 ui: bdd
 global: expect
 require:
-  - ts-node/register
+  - ts-node/register 
   - source-map-support/register
 recursive: true
 timeout: 5000
@@ -11,9 +11,5 @@ reporter: mocha-multi
 reporter-option:
   - spec=-
   - mocha-junit-reporter=-
-  - mocha-sonarqube-reporter=-
 spec:
-  - src/**/*.test.ts
-  - src/**/*-test.ts
-  - src/**/*.spec.ts
-  - src/**/*-spec.ts
+  - "**/src/**/*.test.ts"
