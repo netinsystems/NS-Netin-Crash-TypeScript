@@ -1,5 +1,0 @@
-main: 
-  files:
-    - expand: true
-      src: package.json
-      dest: dist/

@@ -25,8 +25,9 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "all": "yarn run clean && yarn run compile && yarn run coverage && yarn run mutants",
-    "clean": "rimraf \"./{coverage,.nyc_output}\" \"{stryker.log,test-results.xml,coverage,.nyc_output,dist,reports,stryker-tmp}\"",
+    "all": "yarn run clean && yarn prettier && yarn run compile && yarn run coverage && yarn run mutants",
+    "prettier": "prettier --config .prettierrc.js --write src/**/*.ts",
+    "clean": "rimraf \"./{coverage,.nyc_output}\" \"{stryker.log,test-results.xml,coverage,.nyc_output,dist,reports,.stryker-tmp}\"",
     "compile": "tsc",
     "mocha": "mocha --full-trace --config .config/.mocharc.yml",
     "coverage": "nyc --nycrc-path .config/.nycrc.json mocha --full-trace --config .config/.mocharc.yml",

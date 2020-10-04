@@ -35,7 +35,6 @@ steps:
     useConfigFile: true
     configFilePath: './.config/GitVersion.yml'
 
-
 - task: richardfennellBM.BM-VSTS-Versioning-Task.Version-JSONFile-Task.VersionJSONFile@2
   displayName: 'Update package.json SemVer'
   inputs:

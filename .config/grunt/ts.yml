@@ -1,5 +1,0 @@
-dev:
-  tsconfig: tsconfig.json
-  watch: src/
-compile:
-  tsconfig: tsconfig.json
