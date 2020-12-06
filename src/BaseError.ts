@@ -19,7 +19,7 @@ export interface BaseOptions {
   };
 }
 // *************************************************************************************************
-// #region @Hapi/Joi Validations error interfaces
+// #region joi Validations error interfaces
 export interface ValidationError extends Error {
   name: 'ValidationError';
   isJoi: boolean;

@@ -14,7 +14,7 @@ import { expect, assert } from 'chai';
 import { v4 as uuidV4 } from 'uuid';
 import * as BoomHelpers from './httpHelpers';
 import { Boom, BoomOptions } from './BoomError';
-import Joi from '@hapi/joi';
+import Joi from 'joi';
 const uuidTest = uuidV4();
 const testError = new SyntaxError('Syntax');
 const optionsTest: BoomOptions = {

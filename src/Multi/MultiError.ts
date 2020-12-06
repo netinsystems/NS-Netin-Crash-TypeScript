@@ -145,7 +145,7 @@ export class Multi extends Base {
       trace: this.trace(),
     };
   }
-  /** Insert \@Hapi/Joi Validation error in the array of causes */
+  /** Insert \joi Validation error in the array of causes */
   public Multify(error: ValidationError): number {
     if (error.name === 'ValidationError') {
       error.details.forEach(detail => {

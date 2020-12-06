@@ -149,8 +149,8 @@ export class Boom extends Base {
     return this._cause;
   }
   /**
-   * Transform \@Hapi/Joi Validation error in a Boom error
-   * @param error - \@Hapi/Joi Validation error
+   * Transform \joi Validation error in a Boom error
+   * @param error - \joi Validation error
    * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
    */
   Boomify(error: ValidationError): void {
