@@ -24,7 +24,7 @@ export interface ValidationError extends Error {
   name: 'ValidationError';
   isJoi: boolean;
   details: ValidationErrorItem[];
-  _object: any;
+  _original: any;
 }
 export interface ValidationErrorItem {
   message: string;
