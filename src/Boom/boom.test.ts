@@ -76,7 +76,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON()).to.have.property('links', undefined);
       expect(error.toJSON()).to.have.property('status', 500);
       expect(error.toJSON()).to.have.property('code', 'HTTP');
-      expect(error.toJSON()).to.have.property('tittle', 'Internal Server Error');
+      expect(error.toJSON()).to.have.property('title', 'Internal Server Error');
       expect(error.toJSON()).to.have.property('detail', msg);
       expect(error.toJSON()).to.have.property('source', undefined);
       expect(error.toJSON()).to.have.property('meta', undefined);
@@ -88,7 +88,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON()).to.have.property('links', undefined);
       expect(error.toJSON()).to.have.property('status', 625);
       expect(error.toJSON()).to.have.property('code', 'HTTP');
-      expect(error.toJSON()).to.have.property('tittle', 'Undefined error');
+      expect(error.toJSON()).to.have.property('title', 'Undefined error');
       expect(error.toJSON()).to.have.property('detail', msg);
       expect(error.toJSON()).to.have.property('source', undefined);
       expect(error.toJSON()).to.have.property('meta', undefined);
@@ -102,7 +102,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 400);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Bad Request');
+      expect(error.toJSON()).to.have.property('title', 'Bad Request');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -114,7 +114,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 401);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Unauthorized');
+      expect(error.toJSON()).to.have.property('title', 'Unauthorized');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -126,7 +126,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 402);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Payment Required');
+      expect(error.toJSON()).to.have.property('title', 'Payment Required');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -138,7 +138,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 403);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Forbidden');
+      expect(error.toJSON()).to.have.property('title', 'Forbidden');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -150,7 +150,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 404);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Not Found');
+      expect(error.toJSON()).to.have.property('title', 'Not Found');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -162,7 +162,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 405);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Method Not Allowed');
+      expect(error.toJSON()).to.have.property('title', 'Method Not Allowed');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -174,7 +174,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 406);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Not Acceptable');
+      expect(error.toJSON()).to.have.property('title', 'Not Acceptable');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -186,7 +186,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 407);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Proxy Authentication Required');
+      expect(error.toJSON()).to.have.property('title', 'Proxy Authentication Required');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -198,7 +198,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 408);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Request Time-out');
+      expect(error.toJSON()).to.have.property('title', 'Request Time-out');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -210,7 +210,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 409);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Conflict');
+      expect(error.toJSON()).to.have.property('title', 'Conflict');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -222,7 +222,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 410);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Gone');
+      expect(error.toJSON()).to.have.property('title', 'Gone');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -234,7 +234,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 411);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Length Required');
+      expect(error.toJSON()).to.have.property('title', 'Length Required');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -246,7 +246,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 412);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Precondition Failed');
+      expect(error.toJSON()).to.have.property('title', 'Precondition Failed');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -258,7 +258,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 413);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Request Entity Too Large');
+      expect(error.toJSON()).to.have.property('title', 'Request Entity Too Large');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -270,7 +270,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 414);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Request-URI Too Large');
+      expect(error.toJSON()).to.have.property('title', 'Request-URI Too Large');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -282,7 +282,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 415);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Unsupported Media Type');
+      expect(error.toJSON()).to.have.property('title', 'Unsupported Media Type');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -294,7 +294,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 416);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Requested Range Not Satisfiable');
+      expect(error.toJSON()).to.have.property('title', 'Requested Range Not Satisfiable');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -306,7 +306,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 417);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Expectation Failed');
+      expect(error.toJSON()).to.have.property('title', 'Expectation Failed');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -318,7 +318,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 418);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', "I'm a teapot");
+      expect(error.toJSON()).to.have.property('title', "I'm a teapot");
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -330,7 +330,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 423);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Locked');
+      expect(error.toJSON()).to.have.property('title', 'Locked');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -342,7 +342,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 424);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Failed Dependency');
+      expect(error.toJSON()).to.have.property('title', 'Failed Dependency');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -354,7 +354,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 425);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Too Early');
+      expect(error.toJSON()).to.have.property('title', 'Too Early');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -366,7 +366,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 428);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Precondition Required');
+      expect(error.toJSON()).to.have.property('title', 'Precondition Required');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -378,7 +378,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 429);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Too Many Requests');
+      expect(error.toJSON()).to.have.property('title', 'Too Many Requests');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -390,7 +390,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 451);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Unavailable For Legal Reasons');
+      expect(error.toJSON()).to.have.property('title', 'Unavailable For Legal Reasons');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -402,7 +402,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 500);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Internal Server Error');
+      expect(error.toJSON()).to.have.property('title', 'Internal Server Error');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -414,7 +414,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 501);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Not Implemented');
+      expect(error.toJSON()).to.have.property('title', 'Not Implemented');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -426,7 +426,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 502);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Bad Gateway');
+      expect(error.toJSON()).to.have.property('title', 'Bad Gateway');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -438,7 +438,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 503);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Service Unavailable');
+      expect(error.toJSON()).to.have.property('title', 'Service Unavailable');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);
@@ -450,7 +450,7 @@ describe('In #Boom class the ', () => {
       expect(error.toJSON().links).to.be.deep.equal(optionsTest.links);
       expect(error.toJSON()).to.have.property('status', 504);
       expect(error.toJSON()).to.have.property('code', 'SyntaxError');
-      expect(error.toJSON()).to.have.property('tittle', 'Gateway Time-out');
+      expect(error.toJSON()).to.have.property('title', 'Gateway Time-out');
       expect(error.toJSON()).to.have.property('detail', 'detail');
       expect(error.toJSON().source).to.be.deep.equal(optionsTest.source);
       expect(error.toJSON().meta).to.be.deep.equal(optionsTest.info);

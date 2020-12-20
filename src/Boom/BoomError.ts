@@ -119,7 +119,7 @@ export class Boom extends Base {
       links: this._links,
       status: this.#code,
       code: this.name,
-      tittle: HTTP.CODES.get(this.#code) || 'Undefined error',
+      title: HTTP.CODES.get(this.#code) || 'Undefined error',
       detail: this.message,
       source: this._source,
       meta: this._info,

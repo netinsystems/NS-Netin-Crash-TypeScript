@@ -37,7 +37,7 @@ export interface APIError {
   /** REST API specific error code */
   code: string;
   /** Human-readable summary of problem that SHOULD NOT change from occurrence to occurrence */
-  tittle: string;
+  title: string;
   /** Human-readable explanation specific to this occurrence of the problem */
   detail?: string;
   /** An object containing references to the source of the error */

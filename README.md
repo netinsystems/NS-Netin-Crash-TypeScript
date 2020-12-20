@@ -364,7 +364,7 @@ const error = BoomHelpers.unauthorized('Example', uuidTest, optionsTest);
     };
     status: number;
     code: string;
-    tittle: string;
+    title: string;
     detail?: string;
     source?: APISource;
     meta?: {
