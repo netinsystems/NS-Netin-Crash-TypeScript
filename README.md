@@ -115,7 +115,7 @@ console.log(errorTest.info.par?); // info1
 Por último veremos la utilización de los métodos de la clase (estos métodos están explicados en la parte de API):
 ```js
 const causeError = errorTest.findCauseByName('Error'); // Obtenemos el objeto Error que se ha inroducido como causa del objeto Crash
-const crashFullStack = errorTest.fullStack(); // En el caso de haber introducido información en el atributo stack, sacará un string concatenando las causas de los errores empezando por la propia del Crash y continuando con la del 'cause' (concatenando un 'caused by: ' delante)
+const crashFullStack = errorTest.fullStack(); // En el caso de haber introducido información en el atributo stack, sacará un string concatenando las causas de los errores empezando por la propia del Crash y continuando con la del 'cause' (concatenando un 'caused by ' delante)
 const isCauseOfError = errorTest.hasCauseWithName('Error'); // Nos dice si un error con el nombre proporcionado es una causea del error. En este caso sería TRUE
 const crashJson = errorTest.toJSON(); // Devolvería un string con una estructura en formato Json con los valores del objeto
 /*
@@ -134,7 +134,7 @@ const crashJson = errorTest.toJSON(); // Devolvería un string con una estructur
 }
 */
 const crashToString = errorTest.toString(); // Nos sacaría un string del nombre y el mensaje de error concatenados con ':': 'ERROR_TYPE: Example'
-const crashTrace = errorTest.trace(); // Sacaría un array con el nombre y mensaje de error del Crash y la secuencia de errores que lo han causado, manteniendo el mismo formato (añadiendo 'caused by: ' antes) -> ['ERROR_TYPE: Example', 'caused by: Error: Cause']
+const crashTrace = errorTest.trace(); // Sacaría un array con el nombre y mensaje de error del Crash y la secuencia de errores que lo han causado, manteniendo el mismo formato (añadiendo 'caused by ' antes) -> ['ERROR_TYPE: Example', 'caused by Error: Cause']
 ```
 
 

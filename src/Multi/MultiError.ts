@@ -8,7 +8,6 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
 import { Base, BaseOptions, ValidationError } from '../BaseError';
 import { Crash } from '../Crash';
 
@@ -21,12 +20,12 @@ export interface MultiObject {
   uuid: string;
   trace: string[];
 }
-type Cause = Error | Crash;
+type Cause = Error | Crash | Multi;
 export class Multi extends Base {
   /** Multi error causes */
-  #causes?: Array<Cause>;
+  #causes?: Cause[];
   /** Multi error */
-  private readonly _isMulti = true;
+  readonly #isMulti = true;
   /**
    * Create a new Multi error
    * @param message - error text message
@@ -58,7 +57,7 @@ export class Multi extends Base {
   }
   /** Multi error */
   get isMulti(): boolean {
-    return this._isMulti;
+    return this.#isMulti;
   }
   /** Source errors */
   get causes(): Array<Cause> | undefined {
@@ -109,7 +108,7 @@ export class Multi extends Base {
   public fullStack(): string | undefined {
     let arrayStack = '';
     if (this.#causes !== undefined && this.#causes.length > 0) {
-      arrayStack += '\ncaused by: ';
+      arrayStack += '\ncaused by ';
       this.#causes.forEach(cause => {
         if (cause instanceof Crash) {
           arrayStack += `\n[${cause.fullStack()}]`;

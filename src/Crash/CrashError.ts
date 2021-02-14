@@ -10,7 +10,8 @@
  */
 'use strict';
 import { Base, BaseOptions } from '../BaseError';
-type Cause = Crash | Error;
+import { Multi } from '../Multi';
+type Cause = Crash | Error | Multi;
 export interface CrashOptions extends BaseOptions {
   cause?: Cause;
 }
@@ -61,11 +62,17 @@ export class Crash extends Base {
     const trace: string[] = [];
     let cause = this._cause;
     while (cause) {
-      if (cause instanceof Crash) {
-        trace.push(`caused by: ${cause.toString()}`);
+      if (cause instanceof Multi) {
+        trace.push(`caused by ${cause.toString()}`);
+        if (cause.causes) {
+          trace.push(...cause.causes.map(entry => `failed with ${entry.toString()}`));
+        }
+        cause = undefined;
+      } else if (cause instanceof Crash) {
+        trace.push(`caused by ${cause.toString()}`);
         cause = cause._cause;
       } else {
-        trace.push(`caused by: ${cause.name}: ${cause.message}`);
+        trace.push(`caused by ${cause.name}: ${cause.message}`);
         cause = undefined;
       }
     }
@@ -93,9 +100,9 @@ export class Crash extends Base {
   /** Return a complete full stack of the error */
   public fullStack(): string | undefined {
     if (this._cause instanceof Crash) {
-      return `${this.stack}\ncaused by: ${this._cause.fullStack()}`;
+      return `${this.stack}\ncaused by ${this._cause.fullStack()}`;
     } else if (this._cause instanceof Error) {
-      return `${this.stack}\ncaused by: ${this._cause.stack}`;
+      return `${this.stack}\ncaused by ${this._cause.stack}`;
     }
     return this.stack;
   }

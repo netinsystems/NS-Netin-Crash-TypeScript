@@ -264,7 +264,7 @@ describe('In #Multi class the ', () => {
       const errorTest = new Multi('Example', uuidTest);
       expect(errorTest.toString()).to.be.deep.equal('MultiError: Example');
     });
-    it('trace() return a string with "name: message; caused by: name: message; caused by ..."', () => {
+    it('trace() return a string with "name: message; caused by name: message; caused by ..."', () => {
       const str = [
         'ValidationError: Crash Error',
         'ValidationError: Crash Error',

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "Comments can be put inside `xxx_comment` properties.",
+  "mutate": [
+    "src/**/*.ts",
+    "!src/**/*.test.ts",
+    "!src/**/*-test.ts",
+    "!src/**/*.spec.ts",
+    "!src/**/*-spec.ts"
+  ],
+  "mutator": {
+    "excludedMutations": ["StringLiteral"]
+  },
+  "checkers": ["typescript"],
+  "tsconfigFile": "tsconfig.json",
+  "buildCommand": "yarn compile",
+  "packageManager": "yarn",
+  "reporters": ["html", "clear-text"],
+  "testRunner": "mocha",
+  "allowConsoleColors": true,
+  "fileLogLevel": "info",
+  "logLevel": "info",
+  "coverageAnalysis": "perTest",
+  "concurrency": 0,
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": 40
+  },
+  "mochaOptions": {
+    "spec": ["dist/**/*.test.js"]
+  }
+}
