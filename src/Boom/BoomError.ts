@@ -82,9 +82,9 @@ export class Boom extends Base {
   private readonly _isBoom = true;
   /**
    * Create a new Boom error
+   * @param message - Human-readable explanation specific to this occurrence of the problem
    * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
    * @param code - HTTP Standard error code
-   * @param detail - Human-readable explanation specific to this occurrence of the problem
    * @param options - Specific options for enhanced error management
    */
   constructor(message: string, uuid: string, code = 500, options?: BoomOptions) {
