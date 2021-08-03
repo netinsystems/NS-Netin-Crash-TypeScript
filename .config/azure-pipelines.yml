@@ -1,6 +1,4 @@
-name: netin-js__crash$(Date:yyyyMMdd)$(Rev:.r)
-variables:
-  projectName: NS-Netin-Crash-TypeScript
+name: netin-js$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
  - master
  - develop
@@ -11,127 +9,42 @@ pr:
  - master
  - develop
 
-pool:
-  name: NUCHUB
-workspace:
-  clean: all
-steps:
-- checkout: self
-  clean: true
-  persistCredentials: true
+## Netin - Pipelines templates repository
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: NetinSystems/NS-DevOps-Pipelines
+## Netin - General
+variables:
+  ## Artifact name
+- name: artifactName
+  value: 'NS-Netin-Crash-TypeScript'
+- name: projectName
+  value: NS-Netin-Crash-TypeScript
+  ## GitFlow variables for branch maching
+- template: templates/netin-pipelines-variables.yml@templates
 
-- task: NodeTool@0
-  displayName: 'Setup the nodejs version to 12.14.0'
-  inputs:
-    versionSpec: 12.14.0
-
-- task: gitversion/setup@0
-  displayName: 'Use GitVersion Setup'
-  inputs:
-    versionSpec: '5.x'
-- task: gitversion/execute@0
-  displayName: 'Use GitVersion Execute'
-  inputs:
-    useConfigFile: true
-    configFilePath: './.config/GitVersion.yml'
-
-- task: richardfennellBM.BM-VSTS-Versioning-Task.Version-JSONFile-Task.VersionJSONFile@2
-  displayName: 'Update package.json SemVer'
-  inputs:
-    useBuildNumberDirectly: true
-
-- task: YarnInstaller@3
-  displayName: 'Install Yarn version 1.22.5'
-  inputs:
-    versionSpec: '1.22.5'
-
-- task: Yarn@3
-  displayName: 'Install project node modules'
-  inputs:
-    projectDirectory: '.'
-    arguments: 'install'
-    customRegistry: 'useFeed'
-    customFeed: '54947cc7-1c0a-4d71-a742-0f2cf64772d8'
-
-- task: Yarn@3
-  displayName: 'Execute compilation, unit test and mutants'
-  inputs:
-    projectDirectory: '.'
-    arguments: 'run all'
-
-- task: PublishTestResults@2
-  displayName: 'Publishing test result to Azure DevOps'
-  inputs:
-    testResultsFiles: 'test-results.xml'
-    failTaskOnFailedTests: true
-    publishRunAttachments: false
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage results to Azure DevOps'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/coverage'
-
-- task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
-  displayName: 'Prepare analysis on SonarQube'
-  inputs:
-    SonarQube: 'NetinSystems-SonarQube Endpoint'
-    scannerMode: CLI
-    configMode: manual
-    cliProjectKey: NS-Netin-Crash-TypeScript
-    cliProjectName: NS-Netin-Crash-TypeScript
-    cliProjectVersion: '$(Build.BuildNumber)'
-    extraProperties: |
-     # Additional properties that will be passed to the scanner, 
-     # Put one key=value per line, example:
-     sonar.typescript.lcov.reportPaths=coverage/lcov.info
-     sonar.typescript.tsconfigPath=tsconfig.json
-     sonar.projectBaseDir=.
-     sonar.junit.reportPaths=test-results.xml
-     sonar.test.inclusions=src/**/*-test.ts, src/**/*-spec.ts, src/**/*.test.ts, src/**/*.spec.ts
-     sonar.inclusions=src/**/*
-
-- task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
-  displayName: 'Run Code Analysis'
-
-- task: SonarSource.sonarqube.291ed61f-1ee4-45d3-b1b0-bf822d9095ef.SonarQubePublish@4
-  displayName: 'Publish Quality Gate Result'
-
-- task: SimondeLang.sonar-buildbreaker.sonar-buildbreaker.sonar-buildbreaker@7
-  displayName: 'Break build on quality gate failure'
-  inputs:
-    SonarQube: 'NetinSystems-SonarQube Endpoint'
-
-- task: Npm@1
-  displayName: Publish package to internal feed as oficial version
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  inputs:
-    command: 'custom'
-    customCommand: 'publish'
-    workingDir: '.'
-    customRegistry: 'useFeed'
-    customFeed: '54947cc7-1c0a-4d71-a742-0f2cf64772d8'
-  continueOnError: true
-
-- task: Npm@1
-  displayName: Publish package to internal feed as alpha version
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))
-  inputs:
-    command: 'custom'
-    workingDir: '.'
-    customCommand: 'publish --tag beta'
-    customRegistry: 'useFeed'
-    customFeed: '54947cc7-1c0a-4d71-a742-0f2cf64772d8'
-  continueOnError: true
-
-- task: Npm@1
-  displayName: Publish package to internal feed as beta version
-  condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/develop'), startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')))
-  inputs:
-    command: 'custom'
-    workingDir: '.'
-    customCommand: 'publish --tag alpha'
-    customRegistry: 'useFeed'
-    customFeed: '54947cc7-1c0a-4d71-a742-0f2cf64772d8'
-  continueOnError: true
+stages:
+  ## Stage CODE: GitVersion based on GitFlow, unit-tests and code analysis
+  - stage: 'LIB'
+    displayName: 'Library/Module build'
+    pool:
+      name: NUCHUB
+    jobs:
+      - job: 'CODE_QUALITY'
+        displayName: 'Code Quality Assurance'
+        workspace:
+          clean: all
+        timeoutInMinutes: 15
+        steps:
+        - checkout: self
+          clean: true
+          persistCredentials: true
+        - template: templates/netin-setup-gitversion.yml@templates
+        - template: templates/netin-setup-node-and-yarn.yml@templates
+          parameters:
+            nodeVersion: '14.17.3'    
+        - template: templates/netin-test-regular-repo.yml@templates
+        - template: templates/netin-test-sonarqube-analysis.yml@templates
+        - template: templates/netin-publish-artifacts-regular.yml@templates
