@@ -22,13 +22,16 @@ variables:
   value: 'NS-Netin-Crash-TypeScript'
 - name: projectName
   value: NS-Netin-Crash-TypeScript
+  ## Releases Wiki page
+- name: artifactWikiFileName
+  value: '@netin%2Djs-%2D-crash'
   ## GitFlow variables for branch maching
 - template: templates/netin-pipelines-variables.yml@templates
 
 stages:
   ## Stage CODE: GitVersion based on GitFlow, unit-tests and code analysis
-  - stage: 'LIB'
-    displayName: 'Library/Module build'
+  - stage: 'APP'
+    displayName: 'Application Build'
     pool:
       name: NUCHUB
     jobs:
@@ -48,3 +51,9 @@ stages:
         - template: templates/netin-test-regular-repo.yml@templates
         - template: templates/netin-test-sonarqube-analysis.yml@templates
         - template: templates/netin-publish-artifacts-regular.yml@templates
+          parameters:
+            folder: ns-netin-crash
+  - template: templates/stages/netin-release-library-version.yml@templates
+    parameters:
+      artifactName: ${{variables.artifactName}}
+      artifactWikiFileName: ${{variables.artifactWikiFileName}}

@@ -1,7 +1,7 @@
 {
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": false
+        "editor.formatOnSave": true
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -9,32 +9,34 @@
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": false
+        "editor.formatOnSave": true
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": false
     },
+    "files.associations": { "*.json": "jsonc" },
     "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
     "eslint.validate": ["javascript", "typescript"],
     "mochaExplorer.files": ["src/**/*-test.ts", "src/**/*.test.ts", "src/**/*.spec.ts", "src/**/*-spec.ts"],
     "mochaExplorer.require": "ts-node/register",
     "cSpell.words": [
-        "Acked",
-        "Boomify",
-        "DATAPOINTSET",
-        "TIMEPOINT",
-        "UNPROCESSABLE",
         "ackable",
+        "Acked",
+        "apórtalos",
+        "Boomify",
         "control",
         "cors",
         "datablob",
+        "DATAPOINTSET",
         "dns",
         "nocache",
         "nocheck",
         "poppable",
         "prefetch",
-        "spdy"
+        "spdy",
+        "TIMEPOINT",
+        "UNPROCESSABLE"
     ],
     "typescript.tsdk": "node_modules\\typescript\\lib",
 }

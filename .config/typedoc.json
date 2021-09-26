@@ -1,16 +1,33 @@
 {
-  "mode": "file",
-  "out": "docs",
-  "name": "netin-js",
-  "readme": "../README.md",
-  "includeDeclarations": true,
-  "exclude": ["./node_modules", "src/**/*.test.ts", "src/**/*.spec.ts", "src/**/*-test.ts", "src/**/*-spec.ts"],
-  "tsconfig": "./tsconfig.json",
+  "entryPoints": [
+    "../src/index.ts"
+  ],
+  "entryPointStrategy": "resolve",
+  "exclude": [
+    "./node_modules",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*-test.ts",
+    "src/**/*-spec.ts"
+  ],
+  "externalPattern": [],
   "excludeExternals": true,
-  "ignoreCompilerErrors": true,
-  "listInvalidSymbolLinks": true,
-  "categorizeByGroup": false,
-  "excludeNotExported": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "includes": [],
+  "media": "../.assets",
+  "out": "../docs",
+  "markedOptions": {
+    "gfm": true
+  },
+  "name": "@netin-js/crash",
   "includeVersion": true,
-  "defaultCategory": "netin-js"
+  "disableSources": true,
+  "excludeTags": [],
+  "readme": "../README.md",
+  "categorizeByGroup": false,
+  "categoryOrder": ["Crash", "Multi", "Boom", "*"],
+  "cleanOutputDir": true,
+  "gitRevision": "master"
 }

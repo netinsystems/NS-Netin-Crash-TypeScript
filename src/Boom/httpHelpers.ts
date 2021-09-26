@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Netin Systems S.L. All rights reserved.
+ * Copyright 2021 Netin Systems S.L. All rights reserved.
  * Note: All information contained herein is, and remains the property of Netin Systems S.L. and its
  * suppliers, if any. The intellectual and technical concepts contained herein are property of
  * Netin Systems S.L. and its suppliers and may be covered by European and Foreign patents, patents
@@ -8,7 +8,7 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
+
 import { Boom, BoomOptions } from './BoomError';
 import { HTTP_CODE } from './httpCodes';
 
@@ -25,6 +25,7 @@ function regularError(message: string, uuid: string, code: number, options?: Boo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const badRequest = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.BAD_REQUEST, options);
@@ -37,6 +38,7 @@ export const badRequest = (message: string, uuid: string, options?: BoomOptions)
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const unauthorized = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.UNAUTHORIZED, options);
@@ -51,6 +53,7 @@ export const unauthorized = (message: string, uuid: string, options?: BoomOption
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const paymentRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.PAYMENT_REQUIRED, options);
@@ -64,6 +67,7 @@ export const paymentRequired = (message: string, uuid: string, options?: BoomOpt
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const forbidden = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.FORBIDDEN, options);
@@ -77,6 +81,7 @@ export const forbidden = (message: string, uuid: string, options?: BoomOptions):
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const notFound = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.NOT_FOUND, options);
@@ -89,6 +94,7 @@ export const notFound = (message: string, uuid: string, options?: BoomOptions): 
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const methodNotAllowed = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.METHOD_NOT_ALLOWED, options);
@@ -107,6 +113,7 @@ export const methodNotAllowed = (message: string, uuid: string, options?: BoomOp
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const notAcceptable = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.NOT_ACCEPTABLE, options);
@@ -120,6 +127,7 @@ export const notAcceptable = (message: string, uuid: string, options?: BoomOptio
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const proxyAuthRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.PROXY_AUTHENTICATION_REQUIRED, options);
@@ -135,6 +143,7 @@ export const proxyAuthRequired = (message: string, uuid: string, options?: BoomO
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const requestTimeout = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.REQUEST_TIMEOUT, options);
@@ -148,6 +157,7 @@ export const requestTimeout = (message: string, uuid: string, options?: BoomOpti
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const conflict = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.CONFLICT, options);
@@ -161,6 +171,7 @@ export const conflict = (message: string, uuid: string, options?: BoomOptions): 
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const gone = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.GONE, options);
@@ -171,6 +182,7 @@ export const gone = (message: string, uuid: string, options?: BoomOptions): Boom
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const lengthRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.LENGTH_REQUIRED, options);
@@ -184,6 +196,7 @@ export const lengthRequired = (message: string, uuid: string, options?: BoomOpti
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const preconditionFailed = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.PRECONDITION_FAILED, options);
@@ -195,6 +208,7 @@ export const preconditionFailed = (message: string, uuid: string, options?: Boom
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const payloadTooLarge = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.PAYLOAD_TOO_LARGE, options);
@@ -211,6 +225,7 @@ export const payloadTooLarge = (message: string, uuid: string, options?: BoomOpt
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const uriTooLong = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.URI_TOO_LONG, options);
@@ -223,6 +238,7 @@ export const uriTooLong = (message: string, uuid: string, options?: BoomOptions)
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const unsupportedMediaType = (
   message: string,
@@ -243,6 +259,7 @@ export const unsupportedMediaType = (
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const rangeNotSatisfiable = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.RANGE_NOT_SATISFIABLE, options);
@@ -254,6 +271,7 @@ export const rangeNotSatisfiable = (message: string, uuid: string, options?: Boo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const expectationFailed = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.EXPECTATION_FAILED, options);
@@ -266,6 +284,7 @@ export const expectationFailed = (message: string, uuid: string, options?: BoomO
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const teapot = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.I_AM_A_TEAPOT, options);
@@ -277,6 +296,7 @@ export const teapot = (message: string, uuid: string, options?: BoomOptions): Bo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const unprocessableEntity = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.UNPROCESSABLE_ENTITY, options);
@@ -288,6 +308,7 @@ export const unprocessableEntity = (message: string, uuid: string, options?: Boo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const locked = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.LOCKED, options);
@@ -300,6 +321,7 @@ export const locked = (message: string, uuid: string, options?: BoomOptions): Bo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const failedDependency = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.FAILED_DEPENDENCY, options);
@@ -311,6 +333,7 @@ export const failedDependency = (message: string, uuid: string, options?: BoomOp
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const tooEarly = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.TOO_EARLY, options);
@@ -323,6 +346,7 @@ export const tooEarly = (message: string, uuid: string, options?: BoomOptions): 
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const upgradeRequired = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.UPGRADE_REQUIRED, options);
@@ -336,6 +360,7 @@ export const upgradeRequired = (message: string, uuid: string, options?: BoomOpt
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const preconditionRequired = (
   message: string,
@@ -352,6 +377,7 @@ export const preconditionRequired = (
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const tooManyRequests = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.TOO_MANY_REQUESTS, options);
@@ -370,6 +396,7 @@ export const tooManyRequests = (message: string, uuid: string, options?: BoomOpt
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const headerFieldsTooLarge = (
   message: string,
@@ -378,7 +405,6 @@ export const headerFieldsTooLarge = (
 ): Boom => {
   return regularError(message, uuid, HTTP_CODE.REQUEST_HEADER_FIELDS_TOO_LARGE, options);
 };
-// #endregion
 /**
  * The HyperText Transfer Protocol (HTTP) 451 Unavailable For Legal Reasons client error response
  * code indicates that the user requested a resource that is not available due to legal reasons,
@@ -386,6 +412,7 @@ export const headerFieldsTooLarge = (
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const illegal = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.UNAVAILABLE_FOR_LEGAL_REASONS, options);
@@ -404,6 +431,7 @@ export const illegal = (message: string, uuid: string, options?: BoomOptions): B
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const internalServerError = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.INTERNAL_SERVER_ERROR, options);
@@ -421,6 +449,7 @@ export const internalServerError = (message: string, uuid: string, options?: Boo
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const notImplemented = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.NOT_IMPLEMENTED, options);
@@ -432,6 +461,7 @@ export const notImplemented = (message: string, uuid: string, options?: BoomOpti
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const badGateway = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.BAD_GATEWAY, options);
@@ -447,6 +477,7 @@ export const badGateway = (message: string, uuid: string, options?: BoomOptions)
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const serverUnavailable = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.SERVICE_UNAVAILABLE, options);
@@ -458,6 +489,7 @@ export const serverUnavailable = (message: string, uuid: string, options?: BoomO
  * @param uuid - UUID V4, unique identifier for this particular occurrence of the problem
  * @param message - Human-readable explanation specific to this occurrence of the problem
  * @param options - Specific options for enhanced error management
+ * @public
  */
 export const gatewayTimeout = (message: string, uuid: string, options?: BoomOptions): Boom => {
   return regularError(message, uuid, HTTP_CODE.GATEWAY_TIMEOUT, options);

@@ -1,500 +1,327 @@
 # **@netin-js/crash**
-[![@netin-js/crash package in Netin-Systems-Packages@Local feed in Azure Artifacts](https://devopmytra.feeds.visualstudio.com/_apis/public/Packaging/Feeds/11f97a52-7344-41b1-b9cf-76d1ab3ad622%40148bf7a9-08b9-413e-9768-e937aff0ea98/Packages/614812aa-7eb8-4530-9c9a-74eb594fcb7a/Badge)](https://devopmytra.visualstudio.com/NetinSystems/_packaging?_a=package&feed=Netin-Systems-Packages&package=%40netin-js%2Fcrash&protocolType=Npm&version=0.1.0-transportPrimitives.359&view=overview)
- 
-**@netin-js/crash** 
+
+[![Build Status](https://devopmytra.visualstudio.com/NetinSystems/_apis/build/status/NS-Netin-Crash-TypeScript?repoName=NS-Netin-Crash-TypeScript&branchName=master)](https://devopmytra.visualstudio.com/NetinSystems/_build/latest?definitionId=318&repoName=NS-Netin-Crash-TypeScript&branchName=master)
+[![@netin-js/crash package in Netin-Systems-Packages feed in Azure Artifacts](https://devopmytra.feeds.visualstudio.com/_apis/public/Packaging/Feeds/54947cc7-1c0a-4d71-a742-0f2cf64772d8/Packages/2f7e380e-6733-43a4-835a-63ac4923e4b1/Badge)](https://devopmytra.visualstudio.com/NetinSystems/_packaging?_a=package&feed=54947cc7-1c0a-4d71-a742-0f2cf64772d8&package=2f7e380e-6733-43a4-835a-63ac4923e4b1&preferRelease=true)
+[![Node Version](https://img.shields.io/static/v1?style=flat&logo=node.js&logoColor=green&label=node&message=%3E=12%20||%2014&color=blue)](https://nodejs.org/en/)
+[![Typescript Version](https://img.shields.io/static/v1?style=flat&logo=typescript&label=Typescript&message=4.3&color=blue)](https://www.typescriptlang.org/)
+[![Known Vulnerabilities](https://img.shields.io/static/v1?style=flat&logo=snyk&label=Vulnerabilities&message=0&color=300A98F)](https://snyk.io/package/npm/snyk)
+[![Sonarqube](https://badgen.net/badge/icon/sonarqube?icon=sonarqube&label)](https://sonarqube.mytracloud.es/dashboard?id=NS-Netin-Crash-TypeScript)
+[![Documentation](https://img.shields.io/static/v1?style=flat&logo=readthedocs&logoColor=white&label=Documentation&message=API&color=blue)](https://docs.netin.io/apis/NS-Netin-Crash-TypeScript/index.html)
+
 <div style="text-align:center;background-color:#0091B3;">
-          <img src="https://netin.io/assets/img/landing/home.svg" alt="netin" width="500">
+  <img src="https://netin.io/assets/img/landing/home.svg" alt="netin" width="500">
 </div>
- 
-# Tabla de contenidos
- 
-- [Introducción](#Introducción)
-- [Instalación](#Instalación)
-- [Información](#Información)
-- [Uso](#Uso)
-- [API](#API)
-- [Colaboración](#Colaboración)
-- [Licencia](#Licencia)
- 
-## **Introducción**
 
-Con netin-js/crash podemos mantener un formato estandar para los errores que tengamos durante el desarrollo de un programa para Netin Systems.
+___
 
-Esta librería nos proporciona 3 tipos de errores diferentes para utilizar dependiendo del contexto en el que nos encontremos:
-- **Crash**: se utiliza para los errores comunes, es el error básico.
-- **Multi**: se utiliza cuando tenemos una sucesión de errores y queremos agruparlos todos en el mismo.
-- **Boom**: se utiliza para los errores HTTP.
+## **Table of contents**
 
-## **Instalación**
+- [**@netin-js/crash**](#netin-jscrash)
+  - [**Table of contents**](#table-of-contents)
+  - [**Introduction**](#introduction)
+  - [**Installation**](#installation)
+  - [**Information**](#information)
+  - [**Use**](#use)
+    - [**Mensajes de error**](#mensajes-de-error)
+    - [**Traceability identifier**](#traceability-identifier)
+    - [**Crash**](#crash)
+    - [**Multi**](#multi)
+    - [**Boom**](#boom)
+  - [**API**](#api)
+  - [**Collaboration**](#collaboration)
+  - [**License**](#license)
 
-Es necesario registrarse con Azure DevOps para poder instalarlo, el paquete se encuentra en el [feed de Netin Systems](https://devopmytra.visualstudio.com/NetinSystems/_packaging?_a=connect&feed=Netin-Systems-Packages).
- 
+## **Introduction**
+
+The goal of **@netin-js/crash** is to provide improved, but simplified, error handling, while standardizing error handling across all Netin modules.
+
+## **Installation**
+
+You need to register with Azure DevOps to install it, the package can be found in the [Netin Systems feed](https://devopmytra.visualstudio.com/NetinSystems/_packaging?_a=connect&feed=Netin-Systems-Packages).
+
+- **npm**
+
 ```shell
 npm install @netin-js/crash
 ```
- 
-## **Información**
 
-netin-js/crash nos ofrece 3 clases diferentes para utilizar dependiendo del contexto en el que se estén reportando el error. Como ya hemos visto en la introducción, las clases tienen las siguientes utilidad:
-- **Crash**: se utiliza para los errores comunes, es el error básico.
-- **Multi**: se utiliza cuando tenemos una sucesión de errores y queremos agruparlos todos en el mismo.
-- **Boom**: se utiliza para los errores HTTP.
+- **yarn**
 
-Las 3 clases extienen de la misma clase (Base), para darnos cierta uniformidad a la hora de reportar un error del tipo que sea.  
-Todos los errores generados con cualquiera de estas 3 clases dispondrán de los siguiente atributos communes: 
-- *name* \- nombre de error.
-- *message* \- mensaje de error.
-- *_info* \- información extra sobre el error.
-- *_uuid* \- identificador del proceso donde se produce el error.
-
-
-## **Uso**
-
-Para la correcta implementación de la librería en un proyecto debemos importar las clases que vayamos a utilizar de la siguiente manera:
-```js
-import { Crash, Multi, Boom } from '@netin-js/Crash'
+```shell
+yarn add @netin-js/crash
 ```
 
-Cuando estemos utilizando esta librería, los identificadores UUID deben estar formateado segun el estandar [RFC 4122](https://es.wikipedia.org/wiki/Identificador_%C3%BAnico_universal)
+## **Information**
+
+This library provides us with 3 different types of errors to use depending on the context in which we find ourselves:
+
+- **Crash**: it is the main type of error, it does not allow adding metadata to the error, which will be specially treated by the logging libraries, as well as relating errors to their causes.
+- **Multi**: it is the type of error mainly used in validation processes in which we can have more than one error that prevents an information input or a group of parameters from being validated. This type of error is the one returned to us by the @ netin-js / doorkeeper validation libraries.
+- **Boom**: this type of error standardizes errors in RESTful environments by providing _helpers_ that allow the easy creation of standardized responses to frontend applications.
+
+## **Use**
+
+### **Mensajes de error**
+
+One of the main and common parameters of the three types of error is the message associated with the error. This message indicates the type of error that occurred, always taking into account the [good practices](https://docs.microsoft.com/es-es/windows/win32/uxguide/mess-error?redirectedfrom=MSDN):
+
+- Be clear and unambiguous.
+- Be concise and provide accurate information and only what is necessary.
+- Don't use technical jargon.
+- Be humble, don't blame the user.
+- Avoid using negative words.
+- Indicates the way to fix it to the user.
+- Do not use capital letters.
+- Indicates the correct actions, if any.
+- If there are details about the error, provide them in the corresponding section.
+
+### **Traceability identifier**
+
+According to the standard [RFC 4122](https://es.wikipedia.org/wiki/Identificador_%C3%BAnico_universal), it allows us to associate an identifier of operation or request to the error. This is especially useful for tracing errors in requests or transactions that occur between different systems or libraries. The identifier should be created by the process or system that initiates the operation (Frontend, Service ...), being included in all processes and registers (logging with @ netin-logger) so that this can be used in troubleshooting processes. identifier as _filter_, allowing easy extraction.
+
+![Logging example](../.assets/logging-capture.png)
 
 ### **Crash**
 
-Para crear una instancia de un objeto de tipo Crash, deberemos pasarle el mensaje de error y el UUID del proceso.
-```js
+Simple example of using the `Crash` error type.
+
+```ts
 import { Crash } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
+import { v4 } from 'uuid';
 
-const uuidTest = uuidV4();
-const errorTest = new Crash('Example', uuidTest);
-```
-De esta manera crearíamos un error con el mensaje: 'Example'  
-Una vez creado el error podríamos acceder a sus atributos de la siguiente manera:
-
-```js
-  console.log(errorTest.name); // CrashError
-  console.log(errorTest.message); // Example
-  console.log(errorTest.uuid); // 550e8400-e29b-41d4-a716-446655440000
-  if (errorTest._isCrash) // Es un error de tipo Crash
-  {
-    console.log('Es un error de tipo Crash');
-  }else{
-    console.log('No es un error de tipo Crash');
-  }
+const enhancedError = new Crash('Example', v4());
+console.log(enhancedError.message); // 'Example'
 ```
 
-Además, podremos pasarle información extra sobre el error. como la causa del error que puede ser de tipo Crash o Error, nombre y un objeto con información adicional.
-Se podría añadir la causa del error, que sería un objeto de tipo ``Crash`` o ``Error`` al que podríamos acceder para obtener información más en profundidad sobre el problema que ha ocurrido.  
-También se podría especificar el nombre del error para cambiar el que viene por defecto ('CrashError').
-Por último está la opción de añadir una estructura de strings con información adicional. 
+or even simpler
 
-
-```js
+```ts
 import { Crash } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
 
-const uuidTest = uuidV4();
-const causeErr = new Error('Cause');
-const objectTest = {
-    par: 'info1',
-    par2: 'info2',
-};
-const errorTest = new Crash('Example', uuidTest, {
-    name: 'ERROR_TYPE',
-    cause: causeErr,
-    info: objectTest,
-});
-```
-Estos nuevos atributos que hemos metido en el objeto de error pueden leerse de la siguiente manera:
-```js
-console.log(errorTest.name); // ERROR_TYPE
-console.log(errorTest.cause?.name); // Error
-console.log(errorTest.cause?.message); // Cause
-console.log(errorTest.info.par?); // info1
+const enhancedError = new Crash('Example');
+console.log(enhancedError.message); // 'Example'
 ```
 
-Por último veremos la utilización de los métodos de la clase (estos métodos están explicados en la parte de API):
-```js
-const causeError = errorTest.findCauseByName('Error'); // Obtenemos el objeto Error que se ha inroducido como causa del objeto Crash
-const crashFullStack = errorTest.fullStack(); // En el caso de haber introducido información en el atributo stack, sacará un string concatenando las causas de los errores empezando por la propia del Crash y continuando con la del 'cause' (concatenando un 'caused by ' delante)
-const isCauseOfError = errorTest.hasCauseWithName('Error'); // Nos dice si un error con el nombre proporcionado es una causea del error. En este caso sería TRUE
-const crashJson = errorTest.toJSON(); // Devolvería un string con una estructura en formato Json con los valores del objeto
-/*
-{
-  "name": "ERROR_TYPE",
-  "message": "Example",
-  "uuid": "550e8400-e29b-41d4-a716-446655440000", 
-  "info": {
-    "par": "info1", 
-    "par2": "info2"
-  },
-  "cause": {
-    "name": "Error",
-    "message": "Cause"
-  }
+Crash allows us to add extra information about the error that can be used by higher layers of our application or at the time of recording the errors.
+
+```ts
+import { Crash } from './Crash';
+import fs from 'fs';
+import { v4 } from 'uuid';
+
+const operationId = v4();
+try {
+  const myContent = fs.readFileSync('path/to/file');
+} catch (error) {
+  const enhancedError = new Crash(`Error reading the configuration file`, operationId, {
+    cause: error as Error,
+    name: 'FileError',
+    info: {
+      path: 'path/to/file',
+    },
+  });
+  console.log(enhancedError.trace());
+  // [ 'FileError: Error reading the configuration file',
+  // 'caused by Error: ENOENT: no such file or directory, open \'path/to/file\'' ]
 }
-*/
-const crashToString = errorTest.toString(); // Nos sacaría un string del nombre y el mensaje de error concatenados con ':': 'ERROR_TYPE: Example'
-const crashTrace = errorTest.trace(); // Sacaría un array con el nombre y mensaje de error del Crash y la secuencia de errores que lo han causado, manteniendo el mismo formato (añadiendo 'caused by ' antes) -> ['ERROR_TYPE: Example', 'caused by Error: Cause']
 ```
 
+Crash allows us to easily determine if an error has a specific cause, being able to act differently for each cause.
 
+```ts
+ourPromiseThatRejectCrash()
+  .then(()=>{
+    // Our code in case of success
+  })
+  .catch(error => {
+    if (error.hasCauseWithName('FileError')) {
+      // Our code in case of file error
+    } else {
+      // Our code for the rest type of errors
+    }
+  })
+```
 
 ### **Multi**
 
-Para crear una instancia de un objeto de tipo Multi, deberemos pasarle el mensaje de error y el UUID del proceso.
-```js
+Simple example of using `Multi` type error.
+
+```ts
 import { Multi } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
+import { v4 } from 'uuid';
 
-const uuidTest = uuidV4();
-const errorTest = new Multi('Example', uuidTest);
-```
-Además, podremos pasarle información extra como las causas del error que puede ser de tipo array de Crash y Error, un Error o un Crash, nombre y un objeto con información adicional.
-```js
-import { Multi } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
-
-const uuidTest = uuidV4();
-const causesErr: Array<Crash | Error> = [];
-causes.push(new Crash('Crash Error 1', uuidTest, { name: 'ConnectionError' }));
-causes.push(new Crash('Crash Error 2', uuidTest, { name: 'ValidationError' }));
-const objectTest = {
-    par: 'info1',
-    par2: 'info2',
-};
-
-const errorTest = new Multi('Example', uuidTest, {
-    name: 'ERROR_TYPE',
-    causes: causesErr,
-    info: objectTest,
+const enhancedError = new Multi('Example', v4(), {
+  causes: [new Error('My first check that fail'), new Error('My Second check that fail')]
 });
+```
+
+Errors can be added later, which can be especially useful in transformation processes where various errors can appear during execution.
+
+```ts
+import { Multi, Crash } from '@netin-js/Crash'
+import { v4 } from 'uuid';
+
+const arrayOfNumbers: number[] = [];
+const operationId = v4();
+let enhancedError: Multi | undefined;
+for (let idx = 0; idx < 10; idx++) {
+  arrayOfNumbers.push(Math.random() * (10 - 0) + 0);
+}
+for (const entry of arrayOfNumbers) {
+  if (entry > 5) {
+    const newError = new Crash(`Number of of range`, operationId, {
+      name: 'ValidationError',
+      info: {
+        number: entry,
+      },
+    });
+    if (enhancedError) {
+      enhancedError.push(newError);
+    } else {
+      enhancedError = new Multi(`Errors during validation process`, operationId, {
+        causes: [newError],
+      });
+    }
+  }
+}
+if (enhancedError) {
+  console.log(enhancedError.trace());
+}
 ```
 
 ### **Boom**
 
-Para la instanciación de un objeto de tipo Boom, deberemos pasarle el mensaje de error, el UUID del proceso y el código de error HTTP (si no se especifíca, utilizará el 500 por defecto).
-```js
-import { Boom } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
+The most typical way to use the `Boom` type of error is through helpers, thanks to them, we can create information-rich errors, within the context of our REST API, in a simple way.
 
-const uuidTest = uuidV4();
-const errorTest = new Boom('Example', uuidTest);
+```ts
+import express from 'express';
+import { BoomHelpers } from '@netin-js/crash';
+import { v4 } from 'uuid';
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  const enhancedError = BoomHelpers.internalServerError('Error during request processing', v4());
+  res.status(enhancedError.status).json(enhancedError);
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+});
 ```
-Además, podremos pasarle un BoomOptions con algo de información extra, que es una extensión del BaseOptions.
-```js
-import { Boom } from '@netin-js/Crash'
-import { v4 as uuidV4 } from 'uuid';
 
-const errorTest = new Error('Example of common error');
+Any request to the previous endpoint will return the following result:
 
-const uuidTest = uuidV4();
-const optionsTest: BoomOptions = {
-  links: {
-    self: '/link/test',
-  },
-  source: {
-    pointer: '/this/point',
-    parameter: 'test2',
-  },
-  cause: errorTest,
-  info: {
-    a: 2,
-  },
+```json
+{
+  "uuid": "2a931651-6921-4bda-864e-123b69829cff",
+  "status": 500,
+  "code": "HTTP",
+  "title": "Internal Server Error",
+  "detail": "Error during request processing"
+}
+```
+
+We can even provide more information to the user through the options.
+
+```ts
+import express from 'express';
+import { BoomHelpers, Crash } from '@netin-js/crash';
+import { v4 } from 'uuid';
+const app = express();
+const port = 3000;
+
+const mock = (req: express.Request, res: express.Response, next: express.NextFunction): void => {
+  req.body = {};
+  req.body.reqId = v4();
+  req.body.order = 'myOrder';
+  next();
 };
 
-const error = BoomHelpers.expectationFailed('Example', uuidTest, 404, optionsTest);
+function getOrder(order: string, uuid: string): Promise<void> {
+  return Promise.reject(
+    new Crash(`The requested record is not present in the system`, uuid, {
+      name: 'DataNotPresent',
+      info: { order },
+    })
+  );
+}
+
+app.use(mock);
+app.get('/order', (req, res) => {
+  getOrder(req.body.order, req.body.reqId)
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(error => {
+      const enhancedError = BoomHelpers.badRequest(
+        'Error getting the requested order',
+        req.body.reqId,
+        {
+          cause: error,
+          source: {
+            pointer: req.path,
+            parameters: { order: req.body.order },
+          },
+          name: error.name,
+          info: {
+            detail: error.message,
+          },
+          links: {
+            help: 'help/link/about/orders',
+          },
+        }
+      );
+      res.status(enhancedError.status).json(enhancedError);
+    });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
 ```
-No solo podemos generarlos así, también tenemos la posibilidad de utilizar las funciones definidas en httpHelpers para generar los errores HTTP sin tener que especificar el codigo de error ya que va implícito en la función.
-```js
-import * as BoomHelpers from './httpHelpers';
-import { v4 as uuidV4 } from 'uuid';
 
-const errorTest = new Error('Example of common error');
+Any request to the previous endpoint will return the following result:
 
-const uuidTest = uuidV4();
-const optionsTest: BoomOptions = {
-  links: {
-    self: '/link/test',
+```json
+{
+  "uuid": "59fe72ec-44dc-4cc3-84ec-46c98df00283",
+  "links": {
+    "help": "help/link/about/orders"
   },
-  source: {
-    pointer: '/this/point',
-    parameter: 'test2',
+  "status": 400,
+  "code": "DataNotPresent",
+  "title": "Bad Request",
+  "detail": "Error getting the requested order",
+  "source": {
+    "pointer": "/order",
+    "parameters": {
+      "order": "myOrder"
+    }
   },
-  cause: errorTest,
-  info: {
-    a: 2,
-  },
-};
-
-/* Generamos un Boom con código 400*/
-const error = BoomHelpers.badRequest('Example', uuidTest, optionsTest);
-/* Generamos un Boom con código 401*/
-const error = BoomHelpers.unauthorized('Example', uuidTest, optionsTest);
+  "meta": {
+    "detail": "The requested record is not present in the system"
+  }
+}
 ```
 
 ## **API**
 
-### **CrashOptions** _interface_
-  CrashOptions es una interfaz con las siguientes propiedades:  
-  ```js
-  {
-    cause?: Crash | Error;
-    name?: string;
-    info?: {
-      [x: string]: any;
-    };
-  }
-  ``` 
-### **CrashObject** _interface_
-  CrashObject es una interfaz con las siguientes propiedades:
-  ```js
-  {
-    name: string;
-    message: string;
-    uuid: string;
-    trace: string[];
-  }
-  ```
-### **Crash** _class_
-- **constructor**  
-  - **Crash(message: string, uuid: string, options?: CrashOptions)**   
-    Contructor de la clase Crash. 
-- **properties**
-  - **cause: Crash | Error | undefined**  
-    Devuelve la causa del error
-  - **info: {[x: string]: any} | undefined**
-    Devuelve la propiedad info de las options
-  - **isCrash: boolean**  
-    Indica si el error es de tipo Crash o no
-  - **message: string**  
-    Devuelve en mensaje de error
-  - **name: string**  
-    Devuelve el nombre del error
-  - **uuid: string**  
-    Devuelve el identificador con el que se ha generado el error
-- **methods**
-  - **findCauseByName(name: string): Crash | Error | undefined**  
-    Si la causa tiene el nombre especificado en el método devuelve la causa (tipo Crash o Error) coincidente.
-  - **fullStack(): string | undefined**  
-    Devuelve un string con la pila entera de errores.
-  - **hasCauseWithName(name: string): boolean**  
-    Indica si la causa especificada se encuentra dentro de la cadena de errores
-  - **toJSON(): CrashObject**  
-    Devuelve un objeto del tipo CrashObject con la información del error
-  - **toString(): string**  
-    Devuelve un string que concatena el nombre del error con el mensaje del error.
-  - **trace(): string[]**  
-    Devuelve un array con toda la secuencia de errores
+- [[Crash]]
+- [[Multi]]
+- [[Boom]]
 
-### **MultiOptions** _interface_
-  MultiOptions es una interfaz con las siguientes propiedades:  
-  ```js
-  {
-    causes?: Array<Crash | Error> | Crash | Error;
-    name?: string;
-    info?: {
-      [x: string]: any;
-    };
-  }
-  ``` 
-### **MultiObject** _interface_
-  MultiObject es una interfaz con las siguientes propiedades:
-  ```js
-  {
-    name: string;
-    message: string;
-    uuid: string;
-    trace: string[];
-  }
-  ```
-### **Multi** _class_
-- **constructor**  
-  - **Multi(message: string, uuid: string, options?: MultiOptions)**   
-    Contructor de la clase Multi. 
-- **properties**
-  - **causes: Array<Crash | Error>**  
-    Devuelve un array con las diferentes causas del error
-  - **info: {[x: string]: any} | undefined**
-    Devuelve la propiedad info de las options
-  - **isMulti: boolean**  
-    Indica si el error es de tipo Multi o no
-  - **message: string**  
-    Devuelve en mensaje de error
-  - **name: string**  
-    Devuelve el nombre del error
-  - **uuid: string**  
-    Devuelve el identificador con el que se ha generado el error
-- **methods**
-  - **Multify(error: ValidationError): number**
-    Inserta los diferentes errores de validación de un objeto con la libreria @hapi/joi. Devuelve el numero de errores añadidos.
-  - **findCauseByName(name: string): Crash | Error | undefined**  
-    Busca si existe una causa con el nombre pasado al método y devuelve la causa (tipo Crash o Error) coincidente.
-  - **fullStack(): string | undefined**  
-    Devuelve un string con la pila entera de errores.
-  - **hasCauseWithName(name: string): boolean**  
-    Indica si la causa especificada se encuentra dentro de la cadena de errores
-  - **pop(): Crash | Error | undefined**  
-    Elimina si existe el último error del array causes y devuelve dicho error.
-  - **push(error: Crash | Error): void**  
-    Añade un error al array causes.
-  - **toJSON(): MultiObject**  
-    Devuelve un objeto del tipo MultiObject con la información del error
-  - **toString(): string**  
-    Devuelve un string que concatena el nombre del error con el mensaje del error.
-  - **trace(): string[]**  
-    Devuelve un array con toda la secuencia de errores
+## **Collaboration**
 
-### **APISource** _interface_
-  APISource es una interfaz con las siguientes propiedades:
-  ```js
-  {
-    pointer: string;
-    parameter: { 
-      [x: string]: any;
-    };
-  }
-  ```
-### **APIError** _interface_
-  APIError es una interfaz con las siguientes propiedades:
-  ```js
-  {
-    uuid: string;
-    links?: { 
-      [x: string]: any;
-    };
-    status: number;
-    code: string;
-    title: string;
-    detail?: string;
-    source?: APISource;
-    meta?: {
-      [x: string]: any;
-    };
-  }
-  ```
-### **BoomOptions** _interface_
-  BoomOptions es una interfaz con las siguientes propiedades:
-  ```js
-  {
-    links?: {
-      [x: string]: string;
-    };
-    source?: APISource;
-    cause?: Error | Multi | Crash;
-    name?: string;
-    info?: { 
-      [x: string]: any;
-    };
-  }
-  ```
-### **Boom** _class_
-- **constructor**  
-  - **Boom(message: string, uuid: string, code = 500, options?: BoomOptions)**   
-    Contructor de la clase Boom. 
-- **properties**
-  - **cause: Error | Multi | Crash**  
-    Devuelve la causa del error
-  - **info: {[x: string]: any} | undefined**
-    Devuelve la propiedad info de las options
-  - **isBoom: boolean**  
-    Indica si el error es de tipo Boom o no
-  - **links: {[x: string]: any} | undefined**  
-    Enlaces que proporcionan más detalles sobre la causa del error
-  - **message: string**  
-    Devuelve en mensaje de error
-  - **name: string**  
-    Devuelve el nombre del error
-  - **source: APISource | undefined**  
-    Devuelve el source del error
-  - **status: number**  
-    Devuelve el code del error
-  - **uuid: string**  
-    Devuelve el identificador con el que se ha generado el error
-- **methods**
-  - **Boomify(error: ValidationError): number**
-    Inserta los diferentes errores de validación de un objeto con la libreria @hapi/joi. Devuelve el numero de errores añadidos.
-  - **toJSON(): APIError**  
-    Devuelve un objeto del tipo APIError con la información del error
-  - **toString(): string**  
-    Devuelve un string que concatena el nombre del error con el mensaje del error.
+As in the rest of the **Netin Systems** repositories, any collaboration is always welcome.
 
-### **BoomHelpers** _const_
-  Esta constante actúa como un objeto que tiene diferentes propiedades con valor tipo function. Dichas propiedades de tipo function generan un error de tipo Boom con el code correcto para cada tipo de error.
-  Listado completo de las propiedades de BoomHelpers:
-- **badRequest:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 400
-- **unauthorized:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 401
-- **paymentRequired:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 402
-- **forbidden:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 403
-- **notFound:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 404
-- **methodNotAllowed:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 405
-- **notAcceptable:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 406
-- **proxyAuthRequired:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 407
-- **requestTimeout:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 408
-- **conflict:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 409
-- **gone:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 410
-- **lengthRequired:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 411
-- **preconditionFailed:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 412
-- **payloadTooLarge:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 413
-- **uriTooLong:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 414
-- **unsupportedMediaType:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 415
-- **rangeNotSatisfiable:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 416
-- **expectationFailed:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 417
-- **teapot:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 418
-- **unprocessableEntity:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 422
-- **locked:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 423
-- **failedDependency:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 424
-- **tooEarly:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 425
-- **upgradeRequired:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 426
-- **preconditionRequired:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 428
-- **tooManyRequests:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 429
-- **headerFieldsTooLarge:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 431
-- **illegal:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 451
-- **internalServerError:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 500
-- **notImplemented:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 501
-- **badGateway:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 502
-- **serverUnavailable:(message: string, uuid: string, options?: BoomOptions) => Boom**  
-  Genera un error de tipo Boom con el código 503
-- **gatewayTimeout:(message: string, uuid: string, options?: BoomOptions) => Boom**   
-  Genera un error de tipo Boom con el código 504
+If you think there is a bug, create a [bug] (https://docs.microsoft.com/en-us/azure/devops/boards/backlogs/manage-bugs) providing as much information as possible.
 
-## **Colaboración**
- 
-Este paquete pertenece al monorepositorio de la librería @netin-js, por lo que para cualquier colaboración se han de contemplar las normas de este.
-Para mas detalles visite [@netin-js](https://devopmytra.visualstudio.com/NetinSystems/_git/NS-Netin-Library-TypeScript?path=%2FREADME.md&_a=preview).
- 
-## **Licencia**
- 
-**Copyright 2020 Netin Systems S.L. All rights reserved.**
-> **Note**: 
-> All information contained herein is, and remains the property of **Netin Systems S.L.** and its suppliers, if any. The intellectual and technical concepts contained herein are property of **Netin Systems S.L.** and its suppliers and may be covered by European and Foreign patents, patents in process, and are protected by trade secret or copyright.  Dissemination of this information or the reproduction of this material is strictly forbidden unless prior written permission is obtained from **Netin Systems S.L.**
+If you want to make a new contribution, create a new branch, taking into account the flow established by [GitFlow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow) , make your modifications to it and request their approval through [Pull Request](https://docs.microsoft.com/en-us/azure/devops/repos/git/pull-requests?view=azure-devops ), correctly filling in the template.
+
+## **License**
+
+Copyright 2021 Network Intelligence S.L. All rights reserved.
+
+Note: All information contained herein is, and remains the property of Network Intelligence S.L. and its suppliers, if any. The intellectual and technical concepts contained herein are property of Network Intelligence S.L. and its suppliers and may be covered by European and Foreign patents, patents in process, and are protected by trade secret or copyright.
+Dissemination of this information or the reproduction of this material is strictly forbidden unless prior written permission is obtained from Network Intelligence.

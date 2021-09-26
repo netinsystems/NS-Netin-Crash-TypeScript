@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Netin Systems S.L. All rights reserved.
+ * Copyright 2021 Netin Systems S.L. All rights reserved.
  * Note: All information contained herein is, and remains the property of Netin Systems S.L. and its
  * suppliers, if any. The intellectual and technical concepts contained herein are property of
  * Netin Systems S.L. and its suppliers and may be covered by European and Foreign patents, patents
@@ -8,9 +8,7 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
-import { v4 as uuidV4 } from 'uuid';
-const UUID_LENGTH = 36;
+import { v4, validate } from 'uuid';
 const MESSAGE_LENGTH = 240;
 export interface BaseOptions {
   name?: string;
@@ -18,27 +16,6 @@ export interface BaseOptions {
     [x: string]: any;
   };
 }
-// *************************************************************************************************
-// #region joi Validations error interfaces
-export interface ValidationError extends Error {
-  name: 'ValidationError';
-  isJoi: boolean;
-  details: ValidationErrorItem[];
-  _original: any;
-}
-export interface ValidationErrorItem {
-  message: string;
-  path: Array<string | number>;
-  type: string;
-  context?: Context;
-}
-export interface Context {
-  [key: string]: any;
-  key?: string;
-  label?: string;
-  value?: any;
-}
-// #endregion
 /** Class Base, manages errors in Netin Systems */
 export class Base extends Error {
   /** Crash error extra information */
@@ -48,21 +25,13 @@ export class Base extends Error {
   /** Error name (type) */
   public name = 'BaseError';
   /**
-   * Create a new Crash error
-   * @param message - error text message
+   * Create a new Base error
+   * @param message - human friendly error message
    * @param uuid - unique identifier for this particular occurrence of the problem
    * @param options - enhanced error options
    */
-  constructor(message: string, uuid: string, options?: BaseOptions) {
+  constructor(message: string, uuid?: string | BaseOptions, options?: BaseOptions) {
     super(message);
-    // *****************************************************************************************
-    // #region uuid type safe
-    if (typeof uuid !== 'string' || uuid.length !== UUID_LENGTH) {
-      throw new Base('uuid parameter must be an string and RFC 4122 based', uuidV4());
-    } else {
-      this._uuid = uuid;
-    }
-    // #endregion
     // *****************************************************************************************
     // #region message type safe
     if (typeof message !== 'string') {
@@ -72,6 +41,19 @@ export class Base extends Error {
       message = `${message.substring(0, MESSAGE_LENGTH - 18)} ...too long error`;
     }
     this.message = message;
+    // #endregion
+    // *****************************************************************************************
+    // #region type safe
+    if (typeof uuid === 'string' && validate(uuid)) {
+      this._uuid = uuid;
+    } else if (typeof uuid === 'object' && !Array.isArray(uuid)) {
+      this._uuid = v4();
+      options = uuid;
+    } else if (typeof uuid === 'undefined') {
+      this._uuid = v4();
+    } else {
+      throw new Base('uuid parameter must be an string and RFC 4122 based', v4());
+    }
     // #endregion
     // *****************************************************************************************
     // #region options type safe
@@ -86,15 +68,15 @@ export class Base extends Error {
     // #endregion
     Error.captureStackTrace(this, this.constructor);
   }
-  /** Extra info of this error */
+  /** Return the info object for this error */
   get info(): Record<string, unknown> | undefined {
     return this._info;
   }
-  /** uuid error identifier */
-  get uuid(): string | undefined {
+  /** Return the unique identifier associated to this instance */
+  get uuid(): string {
     return this._uuid;
   }
-  /** Error */
+  /** Return a string formatted as `name:message` */
   public toString(): string {
     return `${this.name}: ${this.message}`;
   }

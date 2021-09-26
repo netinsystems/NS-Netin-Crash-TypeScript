@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Netin Systems S.L. All rights reserved.
+ * Copyright 2021 Netin Systems S.L. All rights reserved.
  * Note: All information contained herein is, and remains the property of Netin Systems S.L. and its
  * suppliers, if any. The intellectual and technical concepts contained herein are property of
  * Netin Systems S.L. and its suppliers and may be covered by European and Foreign patents, patents
@@ -8,45 +8,7 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
-/**
- * Links that leads to further details about this particular occurrence of the problem.
- * A link MUST be represented as either:
- *  - self: a string containing the link’s URL
- *  - related: an object (“link object”) which can contain the following members:
- *    - href: a string containing the link’s URL.
- *    - meta: a meta object containing non-standard meta-information about the link.
- */
-export interface APISource {
-  /** Pointer to the associated entity in the request document [e.g."data/job/title"] */
-  pointer: string;
-  /** A string indicating which URI query parameter caused the error*/
-  parameter: {
-    [x: string]: any;
-  };
-}
-export interface APIError {
-  /** UUID V4, unique identifier for this particular occurrence of the problem */
-  uuid: string;
-  /** Links that leads to further details about this particular occurrence of the problem */
-  links?: {
-    [x: string]: string;
-  };
-  /** HTTP Status code */
-  status: number;
-  /** REST API specific error code */
-  code: string;
-  /** Human-readable summary of problem that SHOULD NOT change from occurrence to occurrence */
-  title: string;
-  /** Human-readable explanation specific to this occurrence of the problem */
-  detail?: string;
-  /** An object containing references to the source of the error */
-  source?: APISource;
-  /** A meta object containing non-standard meta-information about the error */
-  meta?: {
-    [x: string]: any;
-  };
-}
+
 /**
  * Hypertext Transfer Protocol (HTTP) response status codes.
  * {@link https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}

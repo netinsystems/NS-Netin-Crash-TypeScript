@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Netin Systems S.L. All rights reserved.
+ * Copyright 2021 Netin Systems S.L. All rights reserved.
  * Note: All information contained herein is, and remains the property of Netin Systems S.L. and its
  * suppliers, if any. The intellectual and technical concepts contained herein are property of
  * Netin Systems S.L. and its suppliers and may be covered by European and Foreign patents, patents
@@ -8,32 +8,80 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
 import { Base, BaseOptions } from '../BaseError';
+import { Cause } from '..';
 import { Multi } from '../Multi';
-type Cause = Crash | Error | Multi;
+
+/**
+ * Crash error configuration options
+ * @category Crash
+ * @public
+ */
 export interface CrashOptions extends BaseOptions {
+  /** Error that caused the creation of this instance */
   cause?: Cause;
 }
+/**
+ * Crash error object output
+ * @category Crash
+ * @public
+ */
 export interface CrashObject {
+  /** Name of the error */
   name: string;
+  /** Human friendly error message */
   message: string;
+  /** Identification of the process, request or transaction where the error appears */
   uuid: string;
+  /** Stack of error messages arranged according to the hierarchy of errors and causes */
   trace: string[];
 }
-/** Class Crash, manages errors in Netin Systems */
+
+/**
+ * Improved handling of standard errors.
+ *
+ * Crash helps us manage standard errors within our application by providing us with some tools:
+ * - Association of errors and their causes in a hierarchical way.
+ * - Simple search for root causes within the hierarchy of errors.
+ * - Stack management, both of the current instance of the error, and of the causes.
+ * - Facilitate error logging.
+ *
+ * In addition, in combination with the Multi error types, errors in validation processes, and Boom,
+ * errors for the REST-API interfaces, it allows a complete management of the different types of
+ * errors in our backend.
+ * @category Crash
+ * @public
+ */
 export class Crash extends Base {
   /** Crash error cause */
   protected _cause?: Cause;
   /** Crash error */
   #isCrash = true;
   /**
+   * Create a new Crash error instance
+   * @param message - human friendly error message
+   */
+  constructor(message: string);
+  /**
    * Create a new Crash error
-   * @param message - error text message
+   * @param message - human friendly error message
+   * @param options - enhanced error options
+   */
+  constructor(message: string, options: CrashOptions);
+  /**
+   * Create a new Crash error
+   * @param message - human friendly error message
+   * @param uuid - unique identifier for this particular occurrence of the problem
+   */
+  constructor(message: string, uuid: string);
+  /**
+   * Create a new Crash error
+   * @param message - human friendly error message
    * @param uuid - unique identifier for this particular occurrence of the problem
    * @param options - enhanced error options
    */
-  constructor(message: string, uuid: string, options?: CrashOptions) {
+  constructor(message: string, uuid: string, options: CrashOptions);
+  constructor(message: string, uuid?: string | CrashOptions, options?: CrashOptions) {
     super(message, uuid, options);
     // *****************************************************************************************
     // #region options type safe
@@ -41,7 +89,7 @@ export class Crash extends Base {
       if (options.cause instanceof Crash || options.cause instanceof Error) {
         this._cause = options.cause;
       } else {
-        throw new Crash('Parameter cause must be an Error/Crash', uuid);
+        throw new Base('Parameter cause must be an Error/Crash', uuid);
       }
     }
     // #endregion
@@ -49,15 +97,15 @@ export class Crash extends Base {
       this.name = 'CrashError';
     }
   }
-  /** Crash error */
+  /** Determine if this instance is a Crash error */
   get isCrash(): boolean {
     return this.#isCrash;
   }
-  /** Source error */
+  /** Cause source of error */
   get cause(): Cause | undefined {
     return this._cause;
   }
-  /** Get a trace of this sequence of errors */
+  /** Get the trace of this hierarchy of errors */
   public trace(): string[] {
     const trace: string[] = [];
     let cause = this._cause;
@@ -79,7 +127,12 @@ export class Crash extends Base {
     trace.unshift(this.toString());
     return trace;
   }
-  /** Look in the nested causes of the error and return the first occurrence */
+  /**
+   * Look in the nested causes of the error and return the first occurrence of a cause with the
+   * indicated name
+   * @param name - name of the error to search for
+   * @returns the cause, if there is any present with that name
+   */
   public findCauseByName(name: string): Cause | undefined {
     let cause = this._cause;
     while (cause) {
@@ -93,11 +146,18 @@ export class Crash extends Base {
     }
     return undefined;
   }
-  /** Check if the cause is present in the nested chain of errors */
+  /**
+   * Check if there is any cause in the stack with the indicated name
+   * @param name - name of the error to search for
+   * @returns Boolean value as the result of the search
+   */
   public hasCauseWithName(name: string): boolean {
     return this.findCauseByName(name) !== undefined;
   }
-  /** Return a complete full stack of the error */
+  /**
+   * Returns a full stack of the error and causes hierarchically. The string contains the
+   * description of the point in the code at which the Error/Crash was instantiated
+   */
   public fullStack(): string | undefined {
     if (this._cause instanceof Crash) {
       return `${this.stack}\ncaused by ${this._cause.fullStack()}`;
@@ -106,7 +166,7 @@ export class Crash extends Base {
     }
     return this.stack;
   }
-  /** Return a JSON object */
+  /** Return Crash error in JSON format */
   public toJSON(): CrashObject {
     return {
       name: this.name,

@@ -8,5 +8,17 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-'use strict';
-export * from './MultiError';
+
+/**
+ * Object with the key information of the requested resource in the REST API context
+ * @category Boom
+ * @public
+ */
+export interface APIResource {
+  /** Pointer to the associated resource in the request [e.g."data/job/title"] */
+  pointer: string;
+  /** A string indicating which URI query parameter caused the error */
+  parameter: {
+    [x: string]: any;
+  };
+}

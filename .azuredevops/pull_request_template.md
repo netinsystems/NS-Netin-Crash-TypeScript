@@ -10,14 +10,6 @@ _Describa el problema específico que se está solucionando, solo un resumen ser
 
 _Resuma el cambio realizado, p.ej.: añadido nuevo template para npm, modificado nombre descriptivo de fase ..._
 
-### Areas afectadas
-
-_Especifique las áreas específicas que se han visto afectados por este cambio. p.ej. proceso de publicación de alarms, estrategia de calculo de datapoints ..._
-
-### Areas no afectadas
-
-_Enumere las áreas que normalmente se podría suponer que se han cambiado pero que no lo son en este caso. El objetivo es ahorrar tiempo al revisor y al evaluador._
-
 ### Checklist de autor antes de realizar la publicación
 
 - [ ] He comprobado que la modificación funciona correctamente.
