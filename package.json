@@ -22,7 +22,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "all": "yarn run clean && yarn prettier && yarn run compile && yarn api-extractor run --verbose && yarn run coverage && yarn doc",
+    "all": "yarn run clean && yarn run compile && yarn api-extractor run --verbose --diagnostics && yarn run coverage && yarn doc",
     "test": "yarn run all",
     "release:notes": "node .config/convertMDtoHTML.js",
     "prettier": "prettier --config .prettierrc.js --write src/**/*.ts",

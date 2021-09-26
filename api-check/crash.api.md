@@ -4,8 +4,6 @@
 
 ```ts
 
-import type { ValidationError as ValidationError_2 } from 'joi';
-
 // @public
 export interface APIError {
     code: string;
@@ -199,7 +197,7 @@ export class Multi extends Base {
     fullStack(): string | undefined;
     hasCauseWithName(name: string): boolean;
     get isMulti(): boolean;
-    Multify(error: ValidationError_2): number;
+    Multify(error: ValidationError): number;
     pop(): Cause | undefined;
     push(error: Cause): void;
     get size(): number;

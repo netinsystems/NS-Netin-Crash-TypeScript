@@ -8,7 +8,7 @@
  * Dissemination of this information or the reproduction of this material is strictly forbidden
  * unless prior written permission is obtained from Netin Systems S.L.
  */
-import type { ValidationError } from 'joi';
+import type { ValidationError } from '../JoiTypes';
 import { Base, BaseOptions } from '../BaseError';
 import { Crash } from '../Crash';
 import { Cause } from '..';
