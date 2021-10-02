@@ -96,7 +96,7 @@ export class Boom extends Base {
   /** Boom error cause */
   protected _cause?: Cause;
   /** Boom error code */
-  #code: number;
+  private readonly _code: number;
   /** Links that leads to further details about this particular occurrence of the problem */
   private readonly _links?: {
     [x: string]: string;
@@ -122,7 +122,7 @@ export class Boom extends Base {
     if (typeof code !== 'number') {
       throw new Crash('Code must be a number', uuid);
     }
-    this.#code = code;
+    this._code = code;
     // #endregion
     // *****************************************************************************************
     // #region options type safe
@@ -142,9 +142,9 @@ export class Boom extends Base {
     return {
       uuid: this._uuid,
       links: this._links,
-      status: this.#code,
+      status: this._code,
       code: this.name,
-      title: CODES.get(this.#code) || 'Undefined error',
+      title: CODES.get(this._code) || 'Undefined error',
       detail: this.message,
       source: this._source,
       meta: this._info,
@@ -152,7 +152,7 @@ export class Boom extends Base {
   }
   /** Boom error code */
   get status(): number {
-    return this.#code;
+    return this._code;
   }
   /**
    * Links that leads to further details about this particular occurrence of the problem.

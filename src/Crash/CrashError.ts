@@ -56,7 +56,7 @@ export class Crash extends Base {
   /** Crash error cause */
   protected _cause?: Cause;
   /** Crash error */
-  #isCrash = true;
+  private readonly _isCrash = true;
   /**
    * Create a new Crash error instance
    * @param message - human friendly error message
@@ -99,7 +99,7 @@ export class Crash extends Base {
   }
   /** Determine if this instance is a Crash error */
   get isCrash(): boolean {
-    return this.#isCrash;
+    return this._isCrash;
   }
   /** Cause source of error */
   get cause(): Cause | undefined {

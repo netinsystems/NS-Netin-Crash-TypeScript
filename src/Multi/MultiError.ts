@@ -53,9 +53,9 @@ export interface MultiObject {
  */
 export class Multi extends Base {
   /** Multi error causes */
-  #causes?: Cause[];
+  private _causes?: Cause[];
   /** Multi error */
-  readonly #isMulti = true;
+  private readonly _isMulti = true;
   /**
    * Create a new Multi error
    * @param message - human friendly error message
@@ -86,7 +86,7 @@ export class Multi extends Base {
     // #region causes type safe
     if (options?.causes !== undefined) {
       if (options.causes instanceof Crash || options.causes instanceof Error) {
-        this.#causes = [options.causes];
+        this._causes = [options.causes];
       } else if (!Array.isArray(options.causes)) {
         throw new Base('Options[causes] must be an array of Error/Crash', uuid);
       } else {
@@ -95,7 +95,7 @@ export class Multi extends Base {
             throw new Base('Options[causes] must be an array of Error/Crash', uuid);
           }
         });
-        this.#causes = options.causes;
+        this._causes = options.causes;
       }
     }
     // #endregion
@@ -105,16 +105,16 @@ export class Multi extends Base {
   }
   /** Determine if this instance is a Multi error */
   get isMulti(): boolean {
-    return this.#isMulti;
+    return this._isMulti;
   }
   /** Causes source of error */
   get causes(): Array<Cause> | undefined {
-    return this.#causes;
+    return this._causes;
   }
   /** Return the number of causes of this error */
   get size(): number {
-    if (this.#causes) {
-      return this.#causes.length;
+    if (this._causes) {
+      return this._causes.length;
     } else {
       return 0;
     }
@@ -141,8 +141,8 @@ export class Multi extends Base {
    */
   public findCauseByName(name: string): Cause | undefined {
     let foundCause: Cause | undefined;
-    if (this.#causes !== undefined) {
-      this.#causes.forEach(cause => {
+    if (this._causes !== undefined) {
+      this._causes.forEach(cause => {
         if (cause.name === name && foundCause === undefined) {
           foundCause = cause;
         }
@@ -167,9 +167,9 @@ export class Multi extends Base {
    */
   public fullStack(): string | undefined {
     let arrayStack = '';
-    if (this.#causes !== undefined && this.#causes.length > 0) {
+    if (this._causes !== undefined && this._causes.length > 0) {
       arrayStack += '\ncaused by ';
-      this.#causes.forEach(cause => {
+      this._causes.forEach(cause => {
         if (cause instanceof Crash) {
           arrayStack += `\n[${cause.fullStack()}]`;
         } else if (cause instanceof Error) {
@@ -184,10 +184,10 @@ export class Multi extends Base {
    * @param error - Cause to be added to the array of causes
    */
   public push(error: Cause): void {
-    if (this.#causes !== undefined) {
-      this.#causes.push(error);
+    if (this._causes !== undefined) {
+      this._causes.push(error);
     } else {
-      this.#causes = [error];
+      this._causes = [error];
     }
   }
   /**
@@ -195,8 +195,8 @@ export class Multi extends Base {
    * @returns the cause that have been removed
    */
   public pop(): Cause | undefined {
-    if (this.#causes !== undefined) {
-      return this.#causes.pop();
+    if (this._causes !== undefined) {
+      return this._causes.pop();
     } else {
       return undefined;
     }
